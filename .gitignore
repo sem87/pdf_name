@@ -1,0 +1,34 @@
+# Виртуальное окружение Python
+.venv/
+venv/
+env/
+do/
+do_renamed/
+# Файлы баз данных Excel
+data_base_py/
+*.xlsm
+*.xlsx
+*.xls
+data_base_2026.xlsm
+# Лог-файлы
+*.log
+logi.log
+
+# Скомпилированные Python-файлы
+__pycache__/
+*.pyc
+*.pyo
+
+# Переменные окружения
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

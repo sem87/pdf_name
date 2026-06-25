@@ -6,7 +6,7 @@ from pdf2image import convert_from_path
 import pytesseract
 from read_xl import poisk_data
 from logi.logi import logger
-# ====================НАЧАЛО НАСТРОЙКИ ====================
+# ====================НАЧАЛО НАСТРОЙКИ ============================
 INPUT_FOLDER = "do"
 OUTPUT_FOLDER = "do_renamed"
 DPI = 300
@@ -100,7 +100,6 @@ def clean_filename(name: str) -> str:
     name = re.sub(r'_+', '_', name)
 
     return name.strip('_')
-
 
 def extract_field(regex: re.Pattern, text: str, field_name: str) -> str:
     """Извлекает поле из текста с помощью регулярного выражения"""

@@ -4,6 +4,9 @@ venv/
 env/
 do/
 do_renamed/
+do_nachalo_new_protocol/
+posle_gotovie_protocol
+best_power_protocol.xlsx
 # Файлы баз данных Excel
 data_base_py/
 *.xlsm

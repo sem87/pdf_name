@@ -50,7 +50,7 @@ def go_po_papkam(target_folder, data):
                                 izgotovitel_protocol = result_nuznii["izgotovitel"]
                                 model_protocol = result_nuznii["model"]
                                 serial_number_protocol = result_nuznii["serial_number"]
-                                cell_id_protocol = result_nuznii["cell_id"]
+                                cell_id_protocol = result_nuznii["cell_id"].split('(')[0].strip()
                                 rich_protocol = result_nuznii["rich"]
                                 tvk_protocol = result_nuznii["tvk"]
                                 chastota = result_nuznii["chastota"]

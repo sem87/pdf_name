@@ -47,7 +47,8 @@ def input_rename_new_protocol(inventory_protocol, mux_protocol, transmitter_prot
     sheet['I13'] = str(tvk_protocol)+"(ТВК), "+str(chastota)+" (МГц)"
     sheet['I14'] = inventory_protocol
     sheet['I15'] = serial_number_protocol
-
+    sheet['O21'] = 3 - int(mux_protocol)
+    sheet['O22'] = cell_id_protocol
     # 4. Сохраняем файл по новому пути
     workbook.save(output_path)
     print(f"✅ Файл успешно сохранен по пути:\n{output_path}")

@@ -9,14 +9,18 @@ import tempfile
 # Путь к исходному файлу (должен существовать)
 input_file = 'data_base_py/best_power_protocol.xlsx'
 
+
 # Папка, в которую нужно сохранить результат
-output_folder = 'posle_gotovie_protocol'
+# output_folder = 'posle_gotovie_protocol'
 
 
 # =============================================
 
-def input_rename_new_protocol(inventory_protocol, mux_protocol, transmitter_protocol, izgotovitel_protocol,
-                              serial_number_protocol, cell_id_protocol, rich_protocol, tvk_protocol,date_protocol,name_naselennogo_puncta,chastota,model_protocol):
+def input_rename_new_protocol(output_folder, inventory_protocol, mux_protocol, transmitter_protocol,
+                              izgotovitel_protocol,
+                              serial_number_protocol, cell_id_protocol, rich_protocol, tvk_protocol, date_protocol,
+                              name_naselennogo_puncta, chastota, model_protocol, replace_text_power, replace_text_MER,
+                              replace_text_neravnomernost_achh, replace_text_frequency_offset):
     # Формируем полный путь для сохранения
     # Имя нового файла
     # output_filename = f"Протокол_зоны_НЦТВ_{itog_rayon}_{itog_location_measure_metrics}_{date_protocol}.xlsx"
@@ -43,15 +47,23 @@ def input_rename_new_protocol(inventory_protocol, mux_protocol, transmitter_prot
     sheet['E5'] = date_protocol
     sheet['H31'] = date_protocol
     sheet['I11'] = name_naselennogo_puncta
-    sheet['I12'] = str(izgotovitel_protocol)+" "+str(model_protocol)
-    sheet['I13'] = str(tvk_protocol)+"(ТВК), "+str(chastota)+" (МГц)"
+    sheet['I12'] = str(izgotovitel_protocol) + " " + str(model_protocol)
+    sheet['I13'] = str(tvk_protocol) + "(ТВК), " + str(chastota) + " (МГц)"
     sheet['I14'] = inventory_protocol
     sheet['I15'] = serial_number_protocol
     sheet['O21'] = 3 - int(mux_protocol)
     sheet['O22'] = cell_id_protocol
+    sheet['I48'] = replace_text_power
+    sheet['I49'] = "0.0E-09"
+    sheet['I50'] = replace_text_MER
+    sheet['I51'] = replace_text_neravnomernost_achh
+    sheet['I53'] = round(random.randint(-900, 900) / 10, 1)
+    sheet['I54'] = replace_text_frequency_offset
+    sheet['N61'] = "Авдяков Е.А." if int(date_protocol.split('-')[-1]) % 2 == 0 else "Халатаев Т.С."
     # 4. Сохраняем файл по новому пути
     workbook.save(output_path)
     print(f"✅ Файл успешно сохранен по пути:\n{output_path}")
+
 
 # def convert_xlsx_to_pdf(folder_name):
 #     """Конвертирует все файлы .xlsx в .pdf в указанной папке

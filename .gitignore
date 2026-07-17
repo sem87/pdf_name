@@ -8,6 +8,7 @@ do_nachalo_new_protocol/
 posle_gotovie_protocol
 best_power_protocol.xlsx
 output_modified.png
+output_color_image.png
 # Файлы баз данных Excel
 data_base_py/
 *.xlsm

@@ -2,7 +2,11 @@ from pathlib import Path
 from logi.logi import logger
 from read_xl_new_protocol import load_excel_data_protocol, get_location_data_protocol
 import re
+import random
 from input_data_new_protocol import input_rename_new_protocol
+from ocr_new_protocol_zamena_dannich import find_and_replace_text_in_image_1, find_and_replace_text_in_image_2, \
+    find_and_replace_text_in_image_3, find_and_replace_text_in_image_4, find_and_replace_text_in_image_5, \
+    find_and_replace_text_in_image_6
 
 # ==================ВХОДНЫЕ ДАННЫЕ=================
 # Указываем имя/путь папки
@@ -40,10 +44,23 @@ def go_po_papkam(target_folder, data):
                         result = get_location_data_protocol(data=data, target_name=name_naselennogo_puncta)
                         for result_nuznii in result:
                             if result_nuznii['mux'] == get_mux_number(mux_value=item2.name):
-                                # Итак есть название и дата протокола  date_protocol и   name_naselennogo_puncta
+                                # # Итак есть название и дата протокола  date_protocol и   name_naselennogo_puncta
                                 # print(
-                                #     f"Дата: {date_protocol}, Название: {name_naselennogo_puncta} Вложенная папка: {item2.name}")
+                                #     f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/zzzzzzzzzzzzzzzzzz")
                                 print(result_nuznii)
+
+                                # НУЖНО СОЗДАТЬ ПАПКУ ПОТОМ В НЕЙ ПАПКУ С MUX И УЖЕ В НЕЙ СОХРАНЯТЬ ПЕРЕДЕЛАННЫЕ ФОТО ГОТОВЫЙ ПРОТОКОЛ XL И PDF
+                                # Нужно определится с этими параметрами !!!!!!!!!!!!!!!!!!!!!!!
+                                replace_text_date_protocol = f"{date_protocol}"
+                                replace_text_chastota = result_nuznii["chastota"]
+                                replace_text_power = round(result_nuznii["rich"] * (1 + (random.randint(2, 8) / 100)),
+                                                           1)
+                                replace_text_neravnomernost_achh = round(random.randint(2, 9) / 10, 1)
+                                replace_text_MER = round(random.randint(365, 420) / 10, 1)
+                                replace_text_frequency_offset = round(random.randint(-4, 4) / 10, 1)
+                                # =========До начала изменения пропишу все параметры чтобы не запутаться=========
+                                # Нужно определится с этими параметрами !!!!!!!!!!!!!!!!!!!!!!!
+
                                 inventory_protocol = result_nuznii["inventory"]
                                 mux_protocol = result_nuznii["mux"]
                                 transmitter_protocol = result_nuznii["transmitter"]
@@ -58,16 +75,28 @@ def go_po_papkam(target_folder, data):
                                 #       serial_number_protocol, cell_id_protocol, rich_protocol, tvk_protocol)
                                 #
 
-                                input_rename_new_protocol(inventory_protocol=inventory_protocol,
-                                                          mux_protocol=mux_protocol,
-                                                          transmitter_protocol=transmitter_protocol,
-                                                          izgotovitel_protocol=izgotovitel_protocol,
-                                                          serial_number_protocol=serial_number_protocol,
-                                                          cell_id_protocol=cell_id_protocol,
-                                                          rich_protocol=rich_protocol, tvk_protocol=tvk_protocol,
-                                                          date_protocol=date_protocol,
-                                                          name_naselennogo_puncta=name_naselennogo_puncta,
-                                                          chastota=chastota,model_protocol=model_protocol)
+                                input_rename_new_protocol(
+                                    output_folder=f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/",
+                                    inventory_protocol=inventory_protocol,
+                                    mux_protocol=mux_protocol,
+                                    transmitter_protocol=transmitter_protocol,
+                                    izgotovitel_protocol=izgotovitel_protocol,
+                                    serial_number_protocol=serial_number_protocol,
+                                    cell_id_protocol=cell_id_protocol,
+                                    rich_protocol=rich_protocol, tvk_protocol=tvk_protocol,
+                                    date_protocol=date_protocol,
+                                    name_naselennogo_puncta=name_naselennogo_puncta,
+                                    chastota=chastota, model_protocol=model_protocol,
+                                    replace_text_power=replace_text_power, replace_text_MER=replace_text_MER,
+                                    replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,replace_text_frequency_offset=replace_text_frequency_offset)
+
+                                # переделывание 1 картинки
+                                input_image_1 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/01.png"
+                                output_image_1 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/01.png"
+                                find_and_replace_text_in_image_1(input_path=input_image_1, output_path=output_image_1,
+                                                                 replace_text_date_protocol=replace_text_date_protocol,
+                                                                 replace_text_chastota=replace_text_chastota,
+                                                                 replace_text_frequency_offset=replace_text_frequency_offset)
 
 
 def get_mux_number(mux_value):

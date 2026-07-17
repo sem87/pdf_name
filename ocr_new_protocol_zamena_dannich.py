@@ -1,183 +1,310 @@
 from PIL import Image, ImageDraw, ImageFont
 import cv2
 import numpy as np
+from PIL import Image, ImageDraw, ImageFont
+import os
 
 
-def replace_carrier_frequency_offset(input_image_path, output_image_path, new_value="0.7"):
-    """
-    Заменяет значение Carrier Frequency Offset на изображении
-    """
-    # Открываем изображение
-    img = Image.open(input_image_path)
-    draw = ImageDraw.Draw(img)
+# def replace_carrier_frequency_offset(input_image_path, output_image_path, new_value="0.7"):
+#     """
+#     Заменяет значение Carrier Frequency Offset на изображении
+#     """
+#     # Открываем изображение
+#     img = Image.open(input_image_path)
+#     draw = ImageDraw.Draw(img)
+#
+#     # Координаты области значения Carrier Frequency Offset
+#     # (настройте под ваше изображение)
+#     # Примерные координаты для вашего скриншота:
+#     x1, y1 = 520, 395  # левый верхний угол
+#     x2, y2 = 620, 420  # правый нижний угол
+#
+#     # Цвет фона (серый, как на изображении)
+#     bg_color = (210, 210, 210)  # светло-серый
+#
+#     # Закрашиваем область старым значением
+#     draw.rectangle([x1, y1, x2, y2], fill=bg_color)
+#
+#     # Пробуем загрузить шрифт (можно изменить на свой)
+#     try:
+#         # Для Linux
+#         font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 14)
+#     except:
+#         try:
+#             # Для Windows
+#             font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 14)
+#         except:
+#             # Стандартный шрифт
+#             font = ImageFont.load_default()
+#
+#     # Текст с новым значением
+#     text = f"{new_value} Hz"
+#     text_color = (0, 0, 180)  # темно-синий, как на оригинальном изображении
+#
+#     # Вычисляем позицию для центрирования текста
+#     bbox = draw.textbbox((0, 0), text, font=font)
+#     text_width = bbox[2] - bbox[0]
+#     text_height = bbox[3] - bbox[1]
+#
+#     x_text = x1 + (x2 - x1 - text_width) // 2
+#     y_text = y1 + (y2 - y1 - text_height) // 2
+#
+#     # Рисуем новый текст
+#     draw.text((x_text, y_text), text, fill=text_color, font=font)
+#
+#     # Сохраняем результат
+#     img.save(output_image_path)
+#     print(f"Изображение сохранено: {output_image_path}")
+#     return img
+#
+#
+# def replace_carrier_frequency_offset_auto(input_image_path, output_image_path, new_value="0.7"):
+#     """
+#     Автоматический поиск и замена значения Carrier Frequency Offset
+#     с использованием OpenCV и шаблонов
+#     """
+#     # Открываем изображение
+#     img = Image.open(input_image_path)
+#     img_cv = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+#     draw = ImageDraw.Draw(img)
+#
+#     # Ищем строку "Carrier Frequency Offset"
+#     # Координаты примерные - нужно настроить или использовать OCR
+#     label_y = 395  # Y-координата строки
+#
+#     # Область где находится значение (справа от метки)
+#     value_x_start = 520
+#     value_x_end = 620
+#     value_y_start = 395
+#     value_y_end = 420
+#
+#     # Закрашиваем старое значение
+#     bg_color = (210, 210, 210)
+#     draw.rectangle([value_x_start, value_y_start, value_x_end, value_y_end], fill=bg_color)
+#
+#     # Загружаем шрифт
+#     try:
+#         font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 14)
+#     except:
+#         try:
+#             font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 14)
+#         except:
+#             font = ImageFont.load_default()
+#
+#     # Новый текст
+#     text = f"{new_value} Hz"
+#     text_color = (0, 0, 180)
+#
+#     # Позиция текста
+#     bbox = draw.textbbox((0, 0), text, font=font)
+#     text_width = bbox[2] - bbox[0]
+#     text_height = bbox[3] - bbox[1]
+#
+#     x_text = value_x_start + (value_x_end - value_x_start - text_width) // 2
+#     y_text = value_y_start + (value_y_end - value_y_start - text_height) // 2
+#
+#     draw.text((x_text, y_text), text, fill=text_color, font=font)
+#
+#     # Сохраняем
+#     img.save(output_image_path)
+#     print(f"Изображение сохранено: {output_image_path}")
+#     return img
 
-    # Координаты области значения Carrier Frequency Offset
-    # (настройте под ваше изображение)
-    # Примерные координаты для вашего скриншота:
-    x1, y1 = 520, 395  # левый верхний угол
-    x2, y2 = 620, 420  # правый нижний угол
-
-    # Цвет фона (серый, как на изображении)
-    bg_color = (210, 210, 210)  # светло-серый
-
-    # Закрашиваем область старым значением
-    draw.rectangle([x1, y1, x2, y2], fill=bg_color)
-
-    # Пробуем загрузить шрифт (можно изменить на свой)
-    try:
-        # Для Linux
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 14)
-    except:
-        try:
-            # Для Windows
-            font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 14)
-        except:
-            # Стандартный шрифт
-            font = ImageFont.load_default()
-
-    # Текст с новым значением
-    text = f"{new_value} Hz"
-    text_color = (0, 0, 180)  # темно-синий, как на оригинальном изображении
-
-    # Вычисляем позицию для центрирования текста
-    bbox = draw.textbbox((0, 0), text, font=font)
-    text_width = bbox[2] - bbox[0]
-    text_height = bbox[3] - bbox[1]
-
-    x_text = x1 + (x2 - x1 - text_width) // 2
-    y_text = y1 + (y2 - y1 - text_height) // 2
-
-    # Рисуем новый текст
-    draw.text((x_text, y_text), text, fill=text_color, font=font)
-
-    # Сохраняем результат
-    img.save(output_image_path)
-    print(f"Изображение сохранено: {output_image_path}")
-    return img
-
-
-def replace_carrier_frequency_offset_auto(input_image_path, output_image_path, new_value="0.7"):
-    """
-    Автоматический поиск и замена значения Carrier Frequency Offset
-    с использованием OpenCV и шаблонов
-    """
-    # Открываем изображение
-    img = Image.open(input_image_path)
-    img_cv = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-    draw = ImageDraw.Draw(img)
-
-    # Ищем строку "Carrier Frequency Offset"
-    # Координаты примерные - нужно настроить или использовать OCR
-    label_y = 395  # Y-координата строки
-
-    # Область где находится значение (справа от метки)
-    value_x_start = 520
-    value_x_end = 620
-    value_y_start = 395
-    value_y_end = 420
-
-    # Закрашиваем старое значение
-    bg_color = (210, 210, 210)
-    draw.rectangle([value_x_start, value_y_start, value_x_end, value_y_end], fill=bg_color)
-
-    # Загружаем шрифт
-    try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 14)
-    except:
-        try:
-            font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 14)
-        except:
-            font = ImageFont.load_default()
-
-    # Новый текст
-    text = f"{new_value} Hz"
-    text_color = (0, 0, 180)
-
-    # Позиция текста
-    bbox = draw.textbbox((0, 0), text, font=font)
-    text_width = bbox[2] - bbox[0]
-    text_height = bbox[3] - bbox[1]
-
-    x_text = value_x_start + (value_x_end - value_x_start - text_width) // 2
-    y_text = value_y_start + (value_y_end - value_y_start - text_height) // 2
-
-    draw.text((x_text, y_text), text, fill=text_color, font=font)
-
-    # Сохраняем
-    img.save(output_image_path)
-    print(f"Изображение сохранено: {output_image_path}")
-    return img
-
-
-def find_and_replace_text_in_image(input_path, output_path, search_text="304.7", replace_text="0.7", unit="Hz"):
-    """
-    Универсальная функция поиска и замены текста на изображении
-    """
-    from PIL import Image, ImageDraw, ImageFont
-
-    img = Image.open(input_path)
-    draw = ImageDraw.Draw(img)
-
-    # Для вашего конкретного изображения - координаты
-    # Carrier Frequency Offset находится примерно на строке 11 таблицы
-
+def menaem_parametri_na_nuznie(draw, replace_text, x1, y1, x2, y2, text_color, bg_color, size=14):
+    """МЕНЯЕТ НА НУЖНЫЙ ТЕКСТ, МОЖНО НЕСКОЛЬКО БЛОКОВ НА 1 КАРТИНКУ"""
     # Координаты значения (настройте под ваше изображение)
-    coords = {
-        'x1': 520,
-        'y1': 395,
-        'x2': 620,
-        'y2': 420
-    }
-
-    # Закрашиваем область
-    bg_color = (210, 210, 210)
+    coords = {'x1': x1, 'y1': y1, 'x2': x2, 'y2': y2}
     draw.rectangle([coords['x1'], coords['y1'], coords['x2'], coords['y2']], fill=bg_color)
-
     # Шрифт
-    try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 14)
-    except:
-        font = ImageFont.load_default()
-
+    # font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", size=size)
+    # font = ImageFont.truetype("/usr/share/fonts/truetype/hack/Hack-Bold.ttf", size=15) # size  боле менее похож
+    # font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf", size=14) # боле менее похож
+    font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",size=16)  # боле менее похож
+    # except:
+    #     # font = ImageFont.load_default()
+    #     print("ошибка со шрифтом")
     # Новый текст
-    text = f"{replace_text} {unit}"
-    text_color = (0, 0, 180)
-
+    text = f"{replace_text}"
     # Центрирование
     bbox = draw.textbbox((0, 0), text, font=font)
     text_width = bbox[2] - bbox[0]
     text_height = bbox[3] - bbox[1]
-
     x_text = coords['x1'] + (coords['x2'] - coords['x1'] - text_width) // 2
     y_text = coords['y1'] + (coords['y2'] - coords['y1'] - text_height) // 2
-
     draw.text((x_text, y_text), text, fill=text_color, font=font)
 
-    img.save(output_path)
-    print(f"Заменено: '{search_text}' -> '{replace_text}'")
-    print(f"Сохранено в: {output_path}")
 
+def find_and_replace_text_in_image_1(input_path, output_path, replace_text_date_protocol, replace_text_chastota,
+                                     replace_text_frequency_offset):
+    """ОТКРЫВАЕМ И СОХРАНЯЕМ ДАННЫЕ"""
+    img = Image.open(input_path)
+    draw = ImageDraw.Draw(img)
+    # вставка даты
+    # нужно отдельно извлечь число месяц год
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_date_protocol, x1=460, y1=0, x2=533, y2=15,
+                               text_color=(250, 250, 250), bg_color=(0, 0, 24), size=15)
+    # вставка частота
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=368, y1=20, x2=390, y2=33,
+                               text_color=(0, 0, 0), bg_color=(189, 190, 189))
+    # вставка carrier frequency offset
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_frequency_offset, x1=426, y1=263, x2=466, y2=277,
+                               text_color=(0, 0, 165),
+                               bg_color=(189, 190, 189))
+    # вставка BER
+    menaem_parametri_na_nuznie(draw, replace_text="0.0E-09", x1=353, y1=403, x2=402, y2=416, text_color=(0, 0, 165),
+                               bg_color=(189, 190, 189))
+    img.save(output_path)
+    # print(f"Заменено: '{search_text}' -> '{replace_text}'")
+    # print(f"Сохранено в: {output_path}")
     return img
 
 
-# Основной код
+def find_and_replace_text_in_image_2(input_path, output_path, replace_text_date_protocol, replace_text_chastota,
+                                     replace_text_MER):
+    """ОТКРЫВАЕМ И СОХРАНЯЕМ ДАННЫЕ"""
+    img = Image.open(input_path)
+    draw = ImageDraw.Draw(img)
+    # вставка даты
+    # нужно отдельно извлечь число месяц год
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_date_protocol, x1=460, y1=0, x2=533, y2=15,
+                               text_color=(250, 250, 250), bg_color=(0, 0, 0), size=15)
+    # вставка частота
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=580, y1=44, x2=602, y2=55,
+                               text_color=(0, 0, 0), bg_color=(210, 210, 211))
+    # вставка MER
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER, x1=587, y1=364, x2=612, y2=378,
+                               text_color=(0, 0, 180), bg_color=(210, 210, 211))
+    img.save(output_path)
+    # print(f"Заменено: '{search_text}' -> '{replace_text}'")
+    # print(f"Сохранено в: {output_path}")
+    return img
+
+
+def find_and_replace_text_in_image_3(input_path, output_path, replace_text_date_protocol, replace_text_chastota,
+                                     replace_text_MER):
+    """ОТКРЫВАЕМ И СОХРАНЯЕМ ДАННЫЕ"""
+    img = Image.open(input_path)
+    draw = ImageDraw.Draw(img)
+    # вставка даты
+    # нужно отдельно извлечь число месяц год
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_date_protocol, x1=460, y1=0, x2=533, y2=15,
+                               text_color=(250, 250, 250), bg_color=(0, 0, 0), size=15)
+    # вставка частота
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=367, y1=22, x2=392, y2=33,
+                               text_color=(0, 0, 0), bg_color=(210, 210, 211))
+    # вставка MER первый вариант
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER, x1=586, y1=122, x2=613, y2=135,
+                               text_color=(0, 0, 180), bg_color=(210, 210, 211))
+    # вставка MER второй вариант
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER, x1=147, y1=186, x2=175, y2=201,
+                               text_color=(200, 210, 210), bg_color=(0, 0, 0))
+    img.save(output_path)
+    # print(f"Заменено: '{search_text}' -> '{replace_text}'")
+    # print(f"Сохранено в: {output_path}")
+    return img
+
+
+def find_and_replace_text_in_image_4(input_path, output_path, replace_text_neravnomernost_achh, replace_text_MER,
+                                     replace_text_chastota, replace_text_date_protocol):
+    """ОТКРЫВАЕМ ,ВСТАВЛЯЕМ И СОХРАНЯЕМ ДАННЫЕ"""
+    img = Image.open(input_path)
+    draw = ImageDraw.Draw(img)
+    # вставка неравномерность АЧХ
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_neravnomernost_achh, x1=256, y1=140, x2=278, y2=154,
+                               text_color=(0, 0, 0), bg_color=(210, 210, 211))
+    # вставка MER
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER, x1=583, y1=122, x2=612, y2=134,
+                               text_color=(0, 0, 180), bg_color=(210, 210, 211))
+    # вставка частота
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=368, y1=20, x2=391, y2=35,
+                               text_color=(0, 0, 0), bg_color=(210, 210, 211))
+    # вставка даты
+    # нужно отдельно извлечь число месяц год
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_date_protocol, x1=460, y1=0, x2=533, y2=15,
+                               text_color=(250, 250, 250), bg_color=(0, 0, 0), size=15)
+    img.save(output_path)
+    # print(f"Заменено: '{search_text}' -> '{replace_text}'")
+    # print(f"Сохранено в: {output_path}")
+    return img
+
+
+def find_and_replace_text_in_image_5(input_path, output_path,replace_text_chastota, replace_text_date_protocol):
+    """ОТКРЫВАЕМ ,ВСТАВЛЯЕМ И СОХРАНЯЕМ ДАННЫЕ"""
+    img = Image.open(input_path)
+    draw = ImageDraw.Draw(img)
+    # вставка даты
+    # нужно отдельно извлечь число месяц год
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_date_protocol, x1=460, y1=0, x2=533, y2=15,
+                               text_color=(250, 250, 250), bg_color=(0, 0, 0), size=15)
+    # вставка частота
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=64, y1=422, x2=95, y2=439,
+                               text_color=(250, 250, 250), bg_color=(0, 0, 0))
+    img.save(output_path)
+    # print(f"Заменено: '{search_text}' -> '{replace_text}'")
+    # print(f"Сохранено в: {output_path}")
+    return img
+
+def find_and_replace_text_in_image_6(input_path, output_path,replace_text_chastota, replace_text_date_protocol):
+    """ОТКРЫВАЕМ ,ВСТАВЛЯЕМ И СОХРАНЯЕМ ДАННЫЕ"""
+    img = Image.open(input_path)
+    draw = ImageDraw.Draw(img)
+    # вставка даты
+    # нужно отдельно извлечь число месяц год
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_date_protocol, x1=460, y1=0, x2=533, y2=15,
+                               text_color=(250, 250, 250), bg_color=(0, 0, 0), size=15)
+    # вставка частота
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=64, y1=422, x2=95, y2=439,
+                               text_color=(250, 250, 250), bg_color=(0, 0, 0))
+    img.save(output_path)
+    # print(f"Заменено: '{search_text}' -> '{replace_text}'")
+    # print(f"Сохранено в: {output_path}")
+    return img
+
+
 if __name__ == "__main__":
-    input_image = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/01.png"
-    output_image = "output_modified.png"
+    # =========До начала изменения пропишу все параметры чтобы не запутаться=========
+    replace_text_date_protocol = "10.07.2026"
+    replace_text_chastota = 555
+    replace_text_neravnomernost_achh = 0.9
+    replace_text_MER = "99.9"
+    replace_text_frequency_offset = "-0.4"
+    # =========До начала изменения пропишу все параметры чтобы не запутаться=========
+    # переделывание 1 картинки
+    input_image_1 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/01.png"
+    output_image_1 = "output_modified.png"
+    find_and_replace_text_in_image_1(input_path=input_image_1, output_path=output_image_1,
+                                     replace_text_date_protocol=replace_text_date_protocol,
+                                     replace_text_chastota=replace_text_chastota,
+                                     replace_text_frequency_offset=replace_text_frequency_offset)
+    # переделывание 2 картинки
+    input_image_2 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/02.png"
+    output_image_2 = "output_modified_2.png"
+    find_and_replace_text_in_image_2(input_path=input_image_2, output_path=output_image_2,
+                                     replace_text_date_protocol=replace_text_date_protocol,
+                                     replace_text_chastota=replace_text_chastota, replace_text_MER=replace_text_MER)
+    # переделывание 3 картинки
+    input_image_3 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/03.png"
+    output_image_3 = "output_modified_3.png"
+    find_and_replace_text_in_image_3(input_path=input_image_3, output_path=output_image_3,
+                                     replace_text_date_protocol=replace_text_date_protocol,
+                                     replace_text_chastota=replace_text_chastota, replace_text_MER=replace_text_MER)
 
-    # Проверяем существование файла
-    import os
-
-    if os.path.exists(input_image):
-        # Заменяем значение
-        result_img = find_and_replace_text_in_image(
-            input_image,
-            output_image,
-            search_text="304.7",
-            replace_text="0.7",
-            unit="Hz"
-        )
-
-        print("\nГотово! Значение Carrier Frequency Offset изменено на 0.7 Hz")
-    else:
-        print(f"Файл не найден: {input_image}")
+    # переделывание 4 картинки
+    input_image_4 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/04.png"
+    output_image_4 = "output_modified_4.png"
+    find_and_replace_text_in_image_4(input_path=input_image_4, output_path=output_image_4,
+                                     replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,
+                                     replace_text_MER=replace_text_MER, replace_text_chastota=replace_text_chastota,
+                                     replace_text_date_protocol=replace_text_date_protocol)
+    # переделывание 5 картинки
+    input_image_5 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/05.png"
+    output_image_5 = "output_modified_5.png"
+    find_and_replace_text_in_image_5(input_path=input_image_5, output_path=output_image_5,
+                                     replace_text_chastota=replace_text_chastota,
+                                     replace_text_date_protocol=replace_text_date_protocol)
+    # переделывание 6 картинки
+    input_image_6 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/06.png"
+    output_image_6 = "output_modified_6.png"
+    find_and_replace_text_in_image_6(input_path=input_image_6, output_path=output_image_6,
+                                     replace_text_chastota=replace_text_chastota,
+                                     replace_text_date_protocol=replace_text_date_protocol)

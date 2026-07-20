@@ -307,40 +307,40 @@ if __name__ == "__main__":
     replace_text_frequency_offset = "-0.4"
     # =========До начала изменения пропишу все параметры чтобы не запутаться=========
     # переделывание 1 картинки
-    input_image_1 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/01.png"
+    input_image_1 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/1.png"
     output_image_1 = "output_modified.png"
     find_and_replace_text_in_image_1(input_path=input_image_1, output_path=output_image_1,
                                      replace_text_date_protocol=replace_text_date_protocol,
                                      replace_text_chastota=replace_text_chastota,
                                      replace_text_frequency_offset=replace_text_frequency_offset)
     # переделывание 2 картинки
-    input_image_2 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/02.png"
+    input_image_2 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/2.png"
     output_image_2 = "output_modified_2.png"
     find_and_replace_text_in_image_2(input_path=input_image_2, output_path=output_image_2,
                                      replace_text_date_protocol=replace_text_date_protocol,
                                      replace_text_chastota=replace_text_chastota, replace_text_MER=replace_text_MER)
     # переделывание 3 картинки
-    input_image_3 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/03.png"
+    input_image_3 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/3.png"
     output_image_3 = "output_modified_3.png"
     find_and_replace_text_in_image_3(input_path=input_image_3, output_path=output_image_3,
                                      replace_text_date_protocol=replace_text_date_protocol,
                                      replace_text_chastota=replace_text_chastota, replace_text_MER=replace_text_MER)
 
     # переделывание 4 картинки
-    input_image_4 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/04.png"
+    input_image_4 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/4.png"
     output_image_4 = "output_modified_4.png"
     find_and_replace_text_in_image_4(input_path=input_image_4, output_path=output_image_4,
                                      replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,
                                      replace_text_MER=replace_text_MER, replace_text_chastota=replace_text_chastota,
                                      replace_text_date_protocol=replace_text_date_protocol)
     # переделывание 5 картинки
-    input_image_5 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/05.png"
+    input_image_5 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/5.png"
     output_image_5 = "output_modified_5.png"
     find_and_replace_text_in_image_5(input_path=input_image_5, output_path=output_image_5,
                                      replace_text_chastota=replace_text_chastota,
                                      replace_text_date_protocol=replace_text_date_protocol)
     # переделывание 6 картинки
-    input_image_6 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/06.png"
+    input_image_6 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/6.png"
     output_image_6 = "output_modified_6.png"
     find_and_replace_text_in_image_6(input_path=input_image_6, output_path=output_image_6,
                                      replace_text_chastota=replace_text_chastota,

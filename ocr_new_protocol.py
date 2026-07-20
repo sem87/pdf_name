@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 
 # Параметры
-INPUT_FOLDER = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/01.png"
+INPUT_FOLDER = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/1.png"
 DPI = 300
 TESSERACT_LANG = 'eng'
 TESSERACT_CONFIG = '--psm 6'

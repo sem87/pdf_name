@@ -98,45 +98,45 @@ def go_po_papkam(target_folder, data):
                                     replace_text_frequency_offset=replace_text_frequency_offset)
 
                                 # переделывание 1 картинки
-                                input_image_1 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/01.png"
-                                output_image_1 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/01.png"
+                                input_image_1 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/1.png"
+                                output_image_1 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/1.png"
                                 find_and_replace_text_in_image_1(input_path=input_image_1, output_path=output_image_1,
                                                                  replace_text_date_protocol=replace_text_date_protocol,
                                                                  replace_text_chastota=replace_text_chastota,
                                                                  replace_text_frequency_offset=replace_text_frequency_offset)
 
                                 # переделывание 2 картинки
-                                input_image_2 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/02.png"
-                                output_image_2 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/02.png"
+                                input_image_2 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/2.png"
+                                output_image_2 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/2.png"
                                 find_and_replace_text_in_image_2(input_path=input_image_2, output_path=output_image_2,
                                                                  replace_text_date_protocol=replace_text_date_protocol,
                                                                  replace_text_chastota=replace_text_chastota,
                                                                  replace_text_MER=replace_text_MER)
                                 # переделывание 3 картинки
-                                input_image_3 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/03.png"
-                                output_image_3 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/03.png"
+                                input_image_3 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
+                                output_image_3 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
                                 find_and_replace_text_in_image_3(input_path=input_image_3, output_path=output_image_3,
                                                                  replace_text_date_protocol=replace_text_date_protocol,
                                                                  replace_text_chastota=replace_text_chastota,
                                                                  replace_text_MER=replace_text_MER)
 
                                 # переделывание 4 картинки
-                                input_image_4 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/04.png"
-                                output_image_4 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/04.png"
+                                input_image_4 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/4.png"
+                                output_image_4 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/4.png"
                                 find_and_replace_text_in_image_4(input_path=input_image_4, output_path=output_image_4,
                                                                  replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,
                                                                  replace_text_MER=replace_text_MER,
                                                                  replace_text_chastota=replace_text_chastota,
                                                                  replace_text_date_protocol=replace_text_date_protocol)
                                 # переделывание 5 картинки
-                                input_image_5 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/05.png"
-                                output_image_5 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/05.png"
+                                input_image_5 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
+                                output_image_5 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
                                 find_and_replace_text_in_image_5(input_path=input_image_5, output_path=output_image_5,
                                                                  replace_text_chastota=replace_text_chastota,
                                                                  replace_text_date_protocol=replace_text_date_protocol)
                                 # переделывание 6 картинки
-                                input_image_6 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/06.png"
-                                output_image_6 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/06.png"
+                                input_image_6 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/6.png"
+                                output_image_6 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/6.png"
                                 find_and_replace_text_in_image_6(input_path=input_image_6, output_path=output_image_6,
                                                                  replace_text_chastota=replace_text_chastota,
                                                                  replace_text_date_protocol=replace_text_date_protocol)
@@ -151,12 +151,12 @@ def go_po_papkam(target_folder, data):
                                 # Вставляем картинки в xl и сохраняем
                                 # Индивидуальная конфигурация каждой картинки
                                 images_config = {
-                                    "01.png": {"x_cm": 2.0, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
-                                    "02.png": {"x_cm": 10.5, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
-                                    "03.png": {"x_cm": 2.0, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
-                                    "04.png": {"x_cm": 10.5, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
-                                    "05.png": {"x_cm": 2.0, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
-                                    "06.png": {"x_cm": 10.5, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
+                                    "1.png": {"x_cm": 2.0, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
+                                    "2.png": {"x_cm": 10.5, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
+                                    "3.png": {"x_cm": 2.0, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
+                                    "4.png": {"x_cm": 10.5, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
+                                    "5.png": {"x_cm": 2.0, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
+                                    "6.png": {"x_cm": 10.5, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
                                     "power.png": {"x_cm": 2.0, "y_cm": 71.0, "w_cm": 10.0, "h_cm": 5.3},
                                 }
                                 insert_png_folder_to_xlsx(

@@ -56,7 +56,8 @@ def load_excel_data_protocol(filepath):
                     'cell_id': cell_id or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО",
                     'rich': rich or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО",
                     'chastota': chastota or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО",
-                    'tvk': tvk or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО"
+                    'tvk': tvk or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО",
+                    'location': location or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО",
                 }
         wb.close()
         return data
@@ -86,12 +87,13 @@ def get_location_data_protocol(data, target_name):
 
 # ==================== ГЛАВНАЯ ФУНКЦИЯ =======================
 if __name__ == "__main__":
-    data = load_excel_data_protocol(filepath=EXCEL_FILE)
-    print(data)
-
-
-    # Использование:
-    result = get_location_data_protocol(data, 'Староактау')
-    # Вывод всех значений (или обращение к конкретным, например result['tvk'])
-    print(result)
+    pass
+    # data = load_excel_data_protocol(filepath=EXCEL_FILE)
+    # print(data)
+    #
+    #
+    # # Использование:
+    # result = get_location_data_protocol(data, 'Староактау')
+    # # Вывод всех значений (или обращение к конкретным, например result['tvk'])
+    # print(result)
 

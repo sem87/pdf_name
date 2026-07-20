@@ -3,11 +3,13 @@ from logi.logi import logger
 from read_xl_new_protocol import load_excel_data_protocol, get_location_data_protocol
 import re
 import random
+import time
+import subprocess
 from datetime import datetime
-from input_data_new_protocol import input_rename_new_protocol
+from input_data_new_protocol import input_rename_new_protocol, insert_png_folder_to_xlsx, convert_xlsx_to_pdf
 from ocr_new_protocol_zamena_dannich import find_and_replace_text_in_image_1, find_and_replace_text_in_image_2, \
     find_and_replace_text_in_image_3, find_and_replace_text_in_image_4, find_and_replace_text_in_image_5, \
-    find_and_replace_text_in_image_6,find_and_replace_text_in_image_7
+    find_and_replace_text_in_image_6, find_and_replace_text_in_image_7
 
 # ==================ВХОДНЫЕ ДАННЫЕ=================
 # Указываем имя/путь папки
@@ -48,15 +50,15 @@ def go_po_papkam(target_folder, data):
                                 # # Итак есть название и дата протокола  date_protocol и   name_naselennogo_puncta
                                 # print(
                                 #     f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/zzzzzzzzzzzzzzzzzz")
-                                print(result_nuznii)
-
+                                # print(result_nuznii)
                                 # НУЖНО СОЗДАТЬ ПАПКУ ПОТОМ В НЕЙ ПАПКУ С MUX И УЖЕ В НЕЙ СОХРАНЯТЬ ПЕРЕДЕЛАННЫЕ ФОТО ГОТОВЫЙ ПРОТОКОЛ XL И PDF
                                 # Нужно определится с этими параметрами !!!!!!!!!!!!!!!!!!!!!!!
-                                replace_text_date_protocol = datetime.strptime(date_protocol, "%Y-%m-%d").strftime("%d/%m/%Y")
+                                replace_text_date_protocol = datetime.strptime(date_protocol, "%Y-%m-%d").strftime(
+                                    "%d/%m/%Y")
                                 replace_text_chastota = result_nuznii["chastota"]
                                 replace_text_power = round(result_nuznii["rich"] * (1 + (random.randint(2, 8) / 100)),
                                                            1)
-                                replace_text_atenuazia=random.randint(45, 55)
+                                replace_text_atenuazia = random.randint(45, 55)
                                 replace_text_neravnomernost_achh = round(random.randint(2, 9) / 10, 1)
                                 replace_text_MER = round(random.randint(365, 420) / 10, 1)
                                 replace_text_frequency_offset = round(random.randint(-4, 4) / 10, 1)
@@ -73,6 +75,7 @@ def go_po_papkam(target_folder, data):
                                 rich_protocol = result_nuznii["rich"]
                                 tvk_protocol = result_nuznii["tvk"]
                                 chastota = result_nuznii["chastota"]
+                                location_itog = result_nuznii["location"]
                                 # print(inventory_protocol, mux_protocol, transmitter_protocol, izgotovitel_protocol,
                                 #       serial_number_protocol, cell_id_protocol, rich_protocol, tvk_protocol)
                                 #
@@ -88,9 +91,11 @@ def go_po_papkam(target_folder, data):
                                     rich_protocol=rich_protocol, tvk_protocol=tvk_protocol,
                                     date_protocol=date_protocol,
                                     name_naselennogo_puncta=name_naselennogo_puncta,
+                                    location_itog=location_itog,
                                     chastota=chastota, model_protocol=model_protocol,
                                     replace_text_power=replace_text_power, replace_text_MER=replace_text_MER,
-                                    replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,replace_text_frequency_offset=replace_text_frequency_offset)
+                                    replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,
+                                    replace_text_frequency_offset=replace_text_frequency_offset)
 
                                 # переделывание 1 картинки
                                 input_image_1 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/01.png"
@@ -140,7 +145,30 @@ def go_po_papkam(target_folder, data):
                                 output_image_7 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/power.png"
                                 find_and_replace_text_in_image_7(input_path=input_image_7, output_path=output_image_7,
                                                                  replace_text_chastota=replace_text_chastota,
-                                                                 replace_text_power=replace_text_power,replace_text_atenuazia=replace_text_atenuazia)
+                                                                 replace_text_power=replace_text_power,
+                                                                 replace_text_atenuazia=replace_text_atenuazia)
+
+                                # Вставляем картинки в xl и сохраняем
+                                # Индивидуальная конфигурация каждой картинки
+                                images_config = {
+                                    "01.png": {"x_cm": 2.0, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
+                                    "02.png": {"x_cm": 10.5, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
+                                    "03.png": {"x_cm": 2.0, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
+                                    "04.png": {"x_cm": 10.5, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
+                                    "05.png": {"x_cm": 2.0, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
+                                    "06.png": {"x_cm": 10.5, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
+                                    "power.png": {"x_cm": 2.0, "y_cm": 71.0, "w_cm": 10.0, "h_cm": 5.3},
+                                }
+                                insert_png_folder_to_xlsx(
+                                    xlsx_path=f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/Протокол_{date_protocol}_{name_naselennogo_puncta}_{mux_protocol}_{transmitter_protocol}_{inventory_protocol}.xlsx",
+                                    image_folder=f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}",
+                                    sheet_name="title", images_config=images_config)
+                                time.sleep(1)
+
+                                # делаем PDF
+                                convert_xlsx_to_pdf(
+                                    xlsx_path=f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/Протокол_{date_protocol}_{name_naselennogo_puncta}_{mux_protocol}_{transmitter_protocol}_{inventory_protocol}.xlsx",
+                                    output_folder="posle_gotovie_protocol/pdf_folder")
 
 
 def get_mux_number(mux_value):

@@ -60,6 +60,7 @@ def input_rename_new_protocol(output_folder, inventory_protocol, mux_protocol, t
     sheet['I53'] = round(random.randint(-900, 900) / 10, 1)
     sheet['I54'] = replace_text_frequency_offset
     sheet['N61'] = "Авдяков Е.А." if int(date_protocol.split('-')[-1]) % 2 == 0 else "Халатаев Т.С."
+    sheet['H66'] = location_itog
     # 4. Сохраняем файл по новому пути
     workbook.save(output_path)
     # print(f"✅ Файл успешно сохранен по пути:\n{output_path}")

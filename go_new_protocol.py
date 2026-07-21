@@ -62,9 +62,11 @@ def go_po_papkam(target_folder, data):
                                 replace_text_atenuazia = random.randint(45, 55)
                                 replace_text_neravnomernost_achh = round(random.randint(2, 9) / 10, 1)
                                 replace_text_MER = round(random.randint(365, 405) / 10, 1)
-                                replace_text_MER_niznie = round(float(replace_text_MER) - float(random.randint(2, 15) / 10), 1)
+                                replace_text_MER_niznie = round(
+                                    float(replace_text_MER) - float(random.randint(2, 15) / 10), 1)
                                 replace_text_frequency_offset = round(random.randint(-4, 4) / 10, 1)
-                                replace_text_frequency_niznie = round(float(replace_text_frequency_offset) - float(random.randint(1, 4) / 10), 1)
+                                replace_text_frequency_niznie = round(
+                                    float(replace_text_frequency_offset) - float(random.randint(1, 4) / 10), 1)
                                 # =========До начала изменения пропишу все параметры чтобы не запутаться=========
                                 # Нужно определится с этими параметрами !!!!!!!!!!!!!!!!!!!!!!!
 
@@ -106,20 +108,27 @@ def go_po_papkam(target_folder, data):
                                 find_and_replace_text_in_image_1(input_path=input_image_1, output_path=output_image_1,
                                                                  replace_text_date_protocol=replace_text_date_protocol,
                                                                  replace_text_chastota=replace_text_chastota,
-                                                                 replace_text_frequency_offset=replace_text_frequency_offset,time_date_protocol=time_date_protocol,replace_text_MER=replace_text_MER,replace_text_MER_niznie=replace_text_MER_niznie)
+                                                                 replace_text_frequency_offset=replace_text_frequency_offset,
+                                                                 time_date_protocol=time_date_protocol,
+                                                                 replace_text_MER=replace_text_MER,
+                                                                 replace_text_MER_niznie=replace_text_MER_niznie)
 
                                 # переделывание 2 картинки
                                 input_image_2 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/2.png"
                                 output_image_2 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/2.png"
                                 find_and_replace_text_in_image_2(input_path=input_image_2, output_path=output_image_2,
                                                                  replace_text_date_protocol=replace_text_date_protocol,
+                                                                 time_date_protocol=time_date_protocol,
                                                                  replace_text_chastota=replace_text_chastota,
-                                                                 replace_text_MER=replace_text_MER,replace_text_MER_niznie=replace_text_MER_niznie,replace_text_frequency_niznie=replace_text_frequency_niznie)
+                                                                 replace_text_MER=replace_text_MER,
+                                                                 replace_text_MER_niznie=replace_text_MER_niznie,
+                                                                 replace_text_frequency_niznie=replace_text_frequency_niznie)
                                 # переделывание 3 картинки
                                 input_image_3 = f"/home/sem/py/pdf_name/data_base_py/3_etalon.png"
                                 output_image_3 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
                                 find_and_replace_text_in_image_3(input_path=input_image_3, output_path=output_image_3,
                                                                  replace_text_date_protocol=replace_text_date_protocol,
+                                                                 time_date_protocol=time_date_protocol,
                                                                  replace_text_chastota=replace_text_chastota,
                                                                  replace_text_MER=replace_text_MER)
 
@@ -130,19 +139,22 @@ def go_po_papkam(target_folder, data):
                                                                  replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,
                                                                  replace_text_MER=replace_text_MER,
                                                                  replace_text_chastota=replace_text_chastota,
-                                                                 replace_text_date_protocol=replace_text_date_protocol)
+                                                                 replace_text_date_protocol=replace_text_date_protocol,
+                                                                 time_date_protocol=time_date_protocol)
                                 # переделывание 5 картинки
                                 input_image_5 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
                                 output_image_5 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
                                 find_and_replace_text_in_image_5(input_path=input_image_5, output_path=output_image_5,
                                                                  replace_text_chastota=replace_text_chastota,
+                                                                 time_date_protocol=time_date_protocol,
                                                                  replace_text_date_protocol=replace_text_date_protocol)
                                 # переделывание 6 картинки
                                 input_image_6 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/6.png"
                                 output_image_6 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/6.png"
                                 find_and_replace_text_in_image_6(input_path=input_image_6, output_path=output_image_6,
                                                                  replace_text_chastota=replace_text_chastota,
-                                                                 replace_text_date_protocol=replace_text_date_protocol)
+                                                                 replace_text_date_protocol=replace_text_date_protocol,
+                                                                 time_date_protocol=time_date_protocol)
                                 # переделывание мощности
                                 input_image_7 = f"/home/sem/py/pdf_name/data_base_py/power_etalon.png"
                                 output_image_7 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/power.png"

@@ -55,13 +55,16 @@ def go_po_papkam(target_folder, data):
                                 # Нужно определится с этими параметрами !!!!!!!!!!!!!!!!!!!!!!!
                                 replace_text_date_protocol = datetime.strptime(date_protocol, "%Y-%m-%d").strftime(
                                     "%d/%m/%Y")
+                                time_date_protocol = f"{random.randint(12, 15)}:{random.randint(10, 57)}"
                                 replace_text_chastota = result_nuznii["chastota"]
                                 replace_text_power = round(result_nuznii["rich"] * (1 + (random.randint(2, 8) / 100)),
                                                            1)
                                 replace_text_atenuazia = random.randint(45, 55)
                                 replace_text_neravnomernost_achh = round(random.randint(2, 9) / 10, 1)
-                                replace_text_MER = round(random.randint(365, 420) / 10, 1)
+                                replace_text_MER = round(random.randint(365, 405) / 10, 1)
+                                replace_text_MER_niznie = round(float(replace_text_MER) - float(random.randint(2, 15) / 10), 1)
                                 replace_text_frequency_offset = round(random.randint(-4, 4) / 10, 1)
+                                replace_text_frequency_niznie = round(float(replace_text_frequency_offset) - float(random.randint(1, 4) / 10), 1)
                                 # =========До начала изменения пропишу все параметры чтобы не запутаться=========
                                 # Нужно определится с этими параметрами !!!!!!!!!!!!!!!!!!!!!!!
 
@@ -103,7 +106,7 @@ def go_po_papkam(target_folder, data):
                                 find_and_replace_text_in_image_1(input_path=input_image_1, output_path=output_image_1,
                                                                  replace_text_date_protocol=replace_text_date_protocol,
                                                                  replace_text_chastota=replace_text_chastota,
-                                                                 replace_text_frequency_offset=replace_text_frequency_offset)
+                                                                 replace_text_frequency_offset=replace_text_frequency_offset,time_date_protocol=time_date_protocol,replace_text_MER=replace_text_MER,replace_text_MER_niznie=replace_text_MER_niznie)
 
                                 # переделывание 2 картинки
                                 input_image_2 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/2.png"
@@ -111,9 +114,9 @@ def go_po_papkam(target_folder, data):
                                 find_and_replace_text_in_image_2(input_path=input_image_2, output_path=output_image_2,
                                                                  replace_text_date_protocol=replace_text_date_protocol,
                                                                  replace_text_chastota=replace_text_chastota,
-                                                                 replace_text_MER=replace_text_MER)
+                                                                 replace_text_MER=replace_text_MER,replace_text_MER_niznie=replace_text_MER_niznie,replace_text_frequency_niznie=replace_text_frequency_niznie)
                                 # переделывание 3 картинки
-                                input_image_3 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
+                                input_image_3 = f"/home/sem/py/pdf_name/data_base_py/3_etalon.png"
                                 output_image_3 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
                                 find_and_replace_text_in_image_3(input_path=input_image_3, output_path=output_image_3,
                                                                  replace_text_date_protocol=replace_text_date_protocol,

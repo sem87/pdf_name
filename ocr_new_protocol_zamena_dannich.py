@@ -191,7 +191,7 @@ def find_and_replace_text_in_image_2(input_path, output_path, replace_text_date_
                                text_color=(0, 0, 180), bg_color=(189, 190, 189), font=font_seredina)
     # вставка внутренней мощьности
     vnutrennia_power2=round(vnutrennia_power-random.randint(1, 4) / 10, 2)
-    menaem_parametri_na_nuznie(draw, replace_text=vnutrennia_power2, x1=570, y1=166, x2=601, y2=177,
+    menaem_parametri_na_nuznie(draw, replace_text=f"  {vnutrennia_power2}", x1=564, y1=166, x2=601, y2=177,
                                text_color=(0, 0, 180), bg_color=(189, 190, 189), font=font_seredina)
     # вставка carrier frequency offset  пониженные значение
     menaem_parametri_na_nuznie(draw, replace_text=f"   {replace_text_frequency_niznie}", x1=583, y1=246, x2=615, y2=258,
@@ -257,7 +257,7 @@ def find_and_replace_text_in_image_4(input_path, output_path, replace_text_nerav
                                text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina)
     # вставка внутренней мощьности
     vnutrennia_power2 = round(vnutrennia_power + random.randint(2, 5) / 10, 2)
-    menaem_parametri_na_nuznie(draw, replace_text=vnutrennia_power2, x1=91, y1=124, x2=121, y2=136,
+    menaem_parametri_na_nuznie(draw, replace_text=f"{vnutrennia_power2}", x1=84, y1=124, x2=121, y2=136,
                                text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina)
     # вставка частота
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=368, y1=24, x2=391, y2=34,
@@ -364,10 +364,10 @@ if __name__ == "__main__":
     time_date_protocol = f"{random.randint(12, 15)}:{random.randint(10, 57)}"
     replace_text_power = 20.5
     replace_text_atenuazia = random.randint(45, 55)
-    vnutrennia_power = round(random.randint(-1402, -702) / 100, 1)
+    vnutrennia_power = round(random.randint(-1402, -1002) / 100, 1)
     # =========До начала изменения пропишу все параметры чтобы не запутаться=========
     # переделывание 1 картинки
-    input_image_1 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/1.png"
+    input_image_1 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux2/1.png"
     output_image_1 = "output_modified.png"
     find_and_replace_text_in_image_1(input_path=input_image_1, output_path=output_image_1,
                                      replace_text_date_protocol=replace_text_date_protocol,
@@ -376,7 +376,7 @@ if __name__ == "__main__":
                                      time_date_protocol=time_date_protocol, replace_text_MER=replace_text_MER,
                                      replace_text_MER_niznie=replace_text_MER_niznie,vnutrennia_power=vnutrennia_power)
     # переделывание 2 картинки
-    input_image_2 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/2.png"
+    input_image_2 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux2/2.png"
     output_image_2 = "output_modified_2.png"
     find_and_replace_text_in_image_2(input_path=input_image_2, output_path=output_image_2,
                                      replace_text_date_protocol=replace_text_date_protocol,
@@ -393,7 +393,7 @@ if __name__ == "__main__":
                                      time_date_protocol=time_date_protocol,vnutrennia_power=vnutrennia_power)
 
     # переделывание 4 картинки
-    input_image_4 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/4.png"
+    input_image_4 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux2/4.png"
     output_image_4 = "output_modified_4.png"
     find_and_replace_text_in_image_4(input_path=input_image_4, output_path=output_image_4,
                                      replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,
@@ -401,14 +401,14 @@ if __name__ == "__main__":
                                      replace_text_date_protocol=replace_text_date_protocol,
                                      time_date_protocol=time_date_protocol,vnutrennia_power=vnutrennia_power)
     # переделывание 5 картинки
-    input_image_5 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/5.png"
+    input_image_5 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux2/5.png"
     output_image_5 = "output_modified_5.png"
     find_and_replace_text_in_image_5(input_path=input_image_5, output_path=output_image_5,
                                      replace_text_chastota=replace_text_chastota,
                                      replace_text_date_protocol=replace_text_date_protocol,
                                      time_date_protocol=time_date_protocol,vnutrennia_power=vnutrennia_power)
     # переделывание 6 картинки
-    input_image_6 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/6.png"
+    input_image_6 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux2/6.png"
     output_image_6 = "output_modified_6.png"
     find_and_replace_text_in_image_6(input_path=input_image_6, output_path=output_image_6,
                                      replace_text_chastota=replace_text_chastota,

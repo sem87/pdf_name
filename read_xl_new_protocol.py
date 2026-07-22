@@ -80,6 +80,7 @@ def get_location_data_protocol(data, target_name):
         base_name = key.split('(')[0].strip().lower()
         if base_name == target_name_clean:
             results.append(value)  # Добавляем найденный словарь в список
+    # print(f"{target_name} - ни чего не найдено ==============")
     return results  # Возвращаем список (будет пустым [], если ничего не найдено)
 
 

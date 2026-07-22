@@ -123,7 +123,7 @@ def menaem_parametri_na_nuznie(draw, replace_text, x1, y1, x2, y2, text_color, b
 
 def find_and_replace_text_in_image_1(input_path, output_path, replace_text_date_protocol, replace_text_chastota,
                                      replace_text_frequency_offset, time_date_protocol, replace_text_MER,
-                                     replace_text_MER_niznie):
+                                     replace_text_MER_niznie,vnutrennia_power):
     """ОТКРЫВАЕМ И СОХРАНЯЕМ ДАННЫЕ"""
     img = Image.open(input_path)
     draw = ImageDraw.Draw(img)
@@ -142,6 +142,9 @@ def find_and_replace_text_in_image_1(input_path, output_path, replace_text_date_
                                text_color=(0, 0, 0), bg_color=(189, 190, 189), font=font_seredina)
     # вставка carrier frequency offset
     menaem_parametri_na_nuznie(draw, replace_text=f"   {replace_text_frequency_offset}", x1=426, y1=266, x2=467, y2=277,
+                               text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina)
+    # вставка внутренняя мощьность
+    menaem_parametri_na_nuznie(draw, replace_text=f"   {vnutrennia_power}", x1=421, y1=166, x2=458, y2=177,
                                text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina)
     # вставка BER
     menaem_parametri_na_nuznie(draw, replace_text="0.0E-09", x1=353, y1=406, x2=402, y2=416, text_color=(0, 0, 165),
@@ -163,7 +166,7 @@ def find_and_replace_text_in_image_1(input_path, output_path, replace_text_date_
 
 def find_and_replace_text_in_image_2(input_path, output_path, replace_text_date_protocol, replace_text_chastota,
                                      replace_text_MER, replace_text_MER_niznie, replace_text_frequency_niznie,
-                                     time_date_protocol):
+                                     time_date_protocol,vnutrennia_power):
     """ОТКРЫВАЕМ И СОХРАНЯЕМ ДАННЫЕ"""
     img = Image.open(input_path)
     draw = ImageDraw.Draw(img)
@@ -186,6 +189,10 @@ def find_and_replace_text_in_image_2(input_path, output_path, replace_text_date_
     # вставка MER  пониженные значение
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER_niznie, x1=588, y1=286, x2=613, y2=297,
                                text_color=(0, 0, 180), bg_color=(189, 190, 189), font=font_seredina)
+    # вставка внутренней мощьности
+    vnutrennia_power2=round(vnutrennia_power-random.randint(1, 4) / 10, 2)
+    menaem_parametri_na_nuznie(draw, replace_text=vnutrennia_power2, x1=570, y1=166, x2=601, y2=177,
+                               text_color=(0, 0, 180), bg_color=(189, 190, 189), font=font_seredina)
     # вставка carrier frequency offset  пониженные значение
     menaem_parametri_na_nuznie(draw, replace_text=f"   {replace_text_frequency_niznie}", x1=583, y1=246, x2=615, y2=258,
                                text_color=(0, 0, 180), bg_color=(189, 190, 189), font=font_seredina)
@@ -200,7 +207,7 @@ def find_and_replace_text_in_image_2(input_path, output_path, replace_text_date_
 
 
 def find_and_replace_text_in_image_3(input_path, output_path, replace_text_date_protocol, replace_text_chastota,
-                                     replace_text_MER, time_date_protocol):
+                                     replace_text_MER, time_date_protocol,vnutrennia_power):
     """ОТКРЫВАЕМ И СОХРАНЯЕМ ДАННЫЕ"""
     img = Image.open(input_path)
     draw = ImageDraw.Draw(img)
@@ -222,6 +229,10 @@ def find_and_replace_text_in_image_3(input_path, output_path, replace_text_date_
     # вставка MER первый вариант
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER, x1=586, y1=124, x2=614, y2=136,
                                text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina2)
+    # вставка внутренней мощьности
+    vnutrennia_power2 = round(vnutrennia_power - random.randint(2, 5) / 10, 2)
+    menaem_parametri_na_nuznie(draw, replace_text=vnutrennia_power2, x1=91, y1=124, x2=121, y2=136,
+                               text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina2)
     # вставка MER второй вариант
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER, x1=147, y1=189, x2=175, y2=199,
                                text_color=(132, 207, 255), bg_color=(0, 0, 0), font=font_seredina)
@@ -230,7 +241,7 @@ def find_and_replace_text_in_image_3(input_path, output_path, replace_text_date_
 
 
 def find_and_replace_text_in_image_4(input_path, output_path, replace_text_neravnomernost_achh, replace_text_MER,
-                                     replace_text_chastota, replace_text_date_protocol, time_date_protocol):
+                                     replace_text_chastota, replace_text_date_protocol, time_date_protocol,vnutrennia_power):
     """ОТКРЫВАЕМ ,ВСТАВЛЯЕМ И СОХРАНЯЕМ ДАННЫЕ"""
     img = Image.open(input_path)
     draw = ImageDraw.Draw(img)
@@ -243,6 +254,10 @@ def find_and_replace_text_in_image_4(input_path, output_path, replace_text_nerav
                                text_color=(0, 0, 0), bg_color=(189, 190, 189), font=font_seredina)
     # вставка MER
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER, x1=585, y1=124, x2=615, y2=134,
+                               text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina)
+    # вставка внутренней мощьности
+    vnutrennia_power2 = round(vnutrennia_power + random.randint(2, 5) / 10, 2)
+    menaem_parametri_na_nuznie(draw, replace_text=vnutrennia_power2, x1=91, y1=124, x2=121, y2=136,
                                text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina)
     # вставка частота
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=368, y1=24, x2=391, y2=34,
@@ -260,12 +275,14 @@ def find_and_replace_text_in_image_4(input_path, output_path, replace_text_nerav
 
 
 def find_and_replace_text_in_image_5(input_path, output_path, replace_text_chastota, replace_text_date_protocol,
-                                     time_date_protocol):
+                                     time_date_protocol,vnutrennia_power):
     """ОТКРЫВАЕМ ,ВСТАВЛЯЕМ И СОХРАНЯЕМ ДАННЫЕ"""
     img = Image.open(input_path)
     draw = ImageDraw.Draw(img)
     font_seredina = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
                                        size=18)  # боле менее похож
+    font_seredina2 = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
+                                       size=16)  # боле менее похож
     font_date = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
                                    size=18)  # боле менее похож
     # вставка даты
@@ -277,17 +294,23 @@ def find_and_replace_text_in_image_5(input_path, output_path, replace_text_chast
     # вставка частота
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=66, y1=425, x2=99, y2=439,
                                text_color=(250, 250, 250), bg_color=(0, 0, 0), font=font_seredina)
+    # вставка внутренней мощьности
+    vnutrennia_power2 = round(vnutrennia_power - random.randint(2, 10) / 10, 2)
+    menaem_parametri_na_nuznie(draw, replace_text=vnutrennia_power2, x1=143, y1=84, x2=174, y2=94,
+                               text_color=(247, 243, 16), bg_color=(0, 48, 123), font=font_seredina2)
     img.save(output_path)
     return img
 
 
 def find_and_replace_text_in_image_6(input_path, output_path, replace_text_chastota, replace_text_date_protocol,
-                                     time_date_protocol):
+                                     time_date_protocol,vnutrennia_power):
     """ОТКРЫВАЕМ ,ВСТАВЛЯЕМ И СОХРАНЯЕМ ДАННЫЕ"""
     img = Image.open(input_path)
     draw = ImageDraw.Draw(img)
     font_seredina = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
                                        size=18)  # боле менее похож
+    font_seredina2 = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
+                                       size=16)  # боле менее похож
     font_date = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
                                    size=18)  # боле менее похож
     # вставка даты
@@ -299,6 +322,10 @@ def find_and_replace_text_in_image_6(input_path, output_path, replace_text_chast
     # вставка частота
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=66, y1=425, x2=99, y2=439,
                                text_color=(250, 250, 250), bg_color=(0, 0, 0), font=font_seredina)
+    # вставка внутренней мощьности
+    vnutrennia_power2 = round(vnutrennia_power - random.randint(1, 10) / 10, 2)
+    menaem_parametri_na_nuznie(draw, replace_text=vnutrennia_power2, x1=143, y1=64, x2=174, y2=74,
+                               text_color=(247, 243, 16), bg_color=(0, 48, 123), font=font_seredina2)
     img.save(output_path)
     return img
 
@@ -313,7 +340,7 @@ def find_and_replace_text_in_image_7(input_path, output_path, replace_text_chast
     font_power = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf", size=119)
 
     # вставка мощности
-    menaem_parametri_na_nuznie(draw, replace_text=replace_text_power, x1=488, y1=299, x2=720, y2=390,
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_power, x1=400, y1=299, x2=720, y2=390,
                                text_color=(136, 136, 136), bg_color=(223, 233, 252), font=font_power)
     # вставка частота
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=1351, y1=801, x2=1440, y2=826,
@@ -335,8 +362,9 @@ if __name__ == "__main__":
     replace_text_frequency_offset = "-0.4"
     replace_text_frequency_niznie = round(float(replace_text_frequency_offset) - float(random.randint(1, 4) / 10), 1)
     time_date_protocol = f"{random.randint(12, 15)}:{random.randint(10, 57)}"
-    replace_text_power = 10.0
+    replace_text_power = 20.5
     replace_text_atenuazia = random.randint(45, 55)
+    vnutrennia_power = round(random.randint(-1402, -702) / 100, 1)
     # =========До начала изменения пропишу все параметры чтобы не запутаться=========
     # переделывание 1 картинки
     input_image_1 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/1.png"
@@ -346,7 +374,7 @@ if __name__ == "__main__":
                                      replace_text_chastota=replace_text_chastota,
                                      replace_text_frequency_offset=replace_text_frequency_offset,
                                      time_date_protocol=time_date_protocol, replace_text_MER=replace_text_MER,
-                                     replace_text_MER_niznie=replace_text_MER_niznie)
+                                     replace_text_MER_niznie=replace_text_MER_niznie,vnutrennia_power=vnutrennia_power)
     # переделывание 2 картинки
     input_image_2 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/2.png"
     output_image_2 = "output_modified_2.png"
@@ -355,14 +383,14 @@ if __name__ == "__main__":
                                      replace_text_chastota=replace_text_chastota, replace_text_MER=replace_text_MER,
                                      replace_text_MER_niznie=replace_text_MER_niznie,
                                      replace_text_frequency_niznie=replace_text_frequency_niznie,
-                                     time_date_protocol=time_date_protocol)
+                                     time_date_protocol=time_date_protocol,vnutrennia_power=vnutrennia_power)
     # переделывание 3 картинки
     input_image_3 = f"/home/sem/py/pdf_name/data_base_py/3_etalon.png"
     output_image_3 = "output_modified_3.png"
     find_and_replace_text_in_image_3(input_path=input_image_3, output_path=output_image_3,
                                      replace_text_date_protocol=replace_text_date_protocol,
                                      replace_text_chastota=replace_text_chastota, replace_text_MER=replace_text_MER,
-                                     time_date_protocol=time_date_protocol)
+                                     time_date_protocol=time_date_protocol,vnutrennia_power=vnutrennia_power)
 
     # переделывание 4 картинки
     input_image_4 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/4.png"
@@ -371,21 +399,21 @@ if __name__ == "__main__":
                                      replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,
                                      replace_text_MER=replace_text_MER, replace_text_chastota=replace_text_chastota,
                                      replace_text_date_protocol=replace_text_date_protocol,
-                                     time_date_protocol=time_date_protocol)
+                                     time_date_protocol=time_date_protocol,vnutrennia_power=vnutrennia_power)
     # переделывание 5 картинки
     input_image_5 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/5.png"
     output_image_5 = "output_modified_5.png"
     find_and_replace_text_in_image_5(input_path=input_image_5, output_path=output_image_5,
                                      replace_text_chastota=replace_text_chastota,
                                      replace_text_date_protocol=replace_text_date_protocol,
-                                     time_date_protocol=time_date_protocol)
+                                     time_date_protocol=time_date_protocol,vnutrennia_power=vnutrennia_power)
     # переделывание 6 картинки
     input_image_6 = "do_nachalo_new_protocol/2026-06-15 Кункас/mux1/6.png"
     output_image_6 = "output_modified_6.png"
     find_and_replace_text_in_image_6(input_path=input_image_6, output_path=output_image_6,
                                      replace_text_chastota=replace_text_chastota,
                                      replace_text_date_protocol=replace_text_date_protocol,
-                                     time_date_protocol=time_date_protocol)
+                                     time_date_protocol=time_date_protocol,vnutrennia_power=vnutrennia_power)
     # переделывание power
     input_image_p = f"/home/sem/py/pdf_name/data_base_py/power_etalon.png"
     output_image_p = "output_modified_power.png"

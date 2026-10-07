@@ -60,7 +60,7 @@ def search_inventory(data, query):
     # Точное совпадение
     if query in data:
         return data[query]
-    # Если ничего не найдено — возвращаем словарь с заглушками
+    # Если ничего не найде-но — возвращаем словарь с заглушками
     return {
         'location': 'нет в XL',
         'mux': 'нет в XL',

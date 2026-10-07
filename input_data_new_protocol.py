@@ -32,7 +32,7 @@ def input_rename_new_protocol(output_folder, inventory_protocol, mux_protocol, t
     # 1. Создаем папку для сохранения, если она еще не существует
     os.makedirs(output_folder, exist_ok=True)
 
-    # 2. Открываем существующий Excel файл
+    # 2. Открываем существующий Excel файл-
     try:
         workbook = openpyxl.load_workbook(input_file)
     except FileNotFoundError:

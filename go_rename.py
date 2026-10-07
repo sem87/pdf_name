@@ -221,7 +221,7 @@ def process_pdfs():
             # logger.info(f"MUX: {mux}")
             # logger.info(f"Модель: {transmitter}")
             # logger.info(f"Инв. номер: {clean_inventory}")
-            # Формирование имени файла
+            # Формирование имени файла-
             new_filename = f"Протокол_{clean_date}_{location}_{mux}_{transmitter}_{clean_inventory}.pdf"
             new_file_path = os.path.join(OUTPUT_FOLDER, new_filename)
 

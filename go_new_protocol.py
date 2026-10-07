@@ -197,7 +197,7 @@ def go_po_papkam(target_folder, data):
                             convert_xlsx_to_pdf(
                                 xlsx_path=f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/Протокол_{date_protocol}_{name_naselennogo_puncta}_{mux_protocol}_{transmitter_protocol}_{inventory_protocol}.xlsx",
                                 output_folder="posle_gotovie_protocol/pdf_folder")
-    print("===============Пустые результаты в списке:", empty_results_dict)
+    print("================Пустые результаты в списке:", empty_results_dict)
 
 
 def get_mux_number(mux_value):

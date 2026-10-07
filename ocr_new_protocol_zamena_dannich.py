@@ -242,7 +242,7 @@ def find_and_replace_text_in_image_3(input_path, output_path, replace_text_date_
 
 def find_and_replace_text_in_image_4(input_path, output_path, replace_text_neravnomernost_achh, replace_text_MER,
                                      replace_text_chastota, replace_text_date_protocol, time_date_protocol,vnutrennia_power):
-    """ОТКРЫВАЕМ ,ВСТАВЛЯЕМ И СОХРАНЯЕМ ДАННЫЕ"""
+    """ОТКРЫВАЕМ- ,ВСТАВЛЯЕМ И СОХРАНЯЕМ ДАННЫЕ"""
     img = Image.open(input_path)
     draw = ImageDraw.Draw(img)
     font_seredina = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",

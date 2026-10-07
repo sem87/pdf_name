@@ -9,6 +9,7 @@ from openpyxl.utils.units import cm_to_EMU
 import subprocess
 import os
 from pathlib import Path
+from datetime import datetime
 # ================= НАСТРОЙКИ =================
 # Путь к исходному файлу (должен существовать)
 input_file = 'data_base_py/best_power_protocol.xlsx'
@@ -44,8 +45,11 @@ def input_rename_new_protocol(output_folder, inventory_protocol, mux_protocol, t
 
     # 3. Вставляем данные
     # --- Вариант А: Вставка в конкретные ячейки по координатам ---
-    sheet['E5'] = date_protocol
-    sheet['H31'] = date_protocol
+
+    # 1. Стандартный (через datetime)
+    date_protocol_res = datetime.strptime(date_protocol, "%Y-%m-%d").strftime("%d.%m.%Y")
+    sheet['E5'] = date_protocol_res
+    sheet['H31'] = date_protocol_res
     sheet['I11'] = location_itog
     sheet['I12'] = str(izgotovitel_protocol) + " " + str(model_protocol)
     sheet['I13'] = str(tvk_protocol) + "(ТВК), " + str(chastota) + " (МГц)"
@@ -59,7 +63,7 @@ def input_rename_new_protocol(output_folder, inventory_protocol, mux_protocol, t
     sheet['I51'] = replace_text_neravnomernost_achh
     sheet['I53'] = round(random.randint(-900, 900) / 10, 1)
     sheet['I54'] = replace_text_frequency_offset
-    sheet['N61'] = "Авдяков Е.А." if int(date_protocol.split('-')[-1]) % 2 == 0 else "Халатаев Т.С."
+    sheet['N61'] = "Авдяков Е.А." # if int(date_protocol.split('-')[-1]) % 2 == 0 else "Халатаев Т.С."
     sheet['H66'] = location_itog
     # 4. Сохраняем файл по новому пути
     workbook.save(output_path)

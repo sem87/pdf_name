@@ -84,8 +84,8 @@ def poisk_data(query):
         logger.warning(f"{query} не найден в XL!.Ошибка в read_xl/poisk_data() {e}")
 # ==================== ГЛАВНАЯ ФУНКЦИЯ =======================
 if __name__ == "__main__":
-    clean_date = "05.03.2026"
-    clean_inventory = "БАШ1880"
+    clean_date = "23.07.2026"
+    clean_inventory = "БАШ1032"
     # ===========================================
     results=poisk_data(query = clean_inventory)
     location = results['location']

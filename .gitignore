@@ -1,40 +1,52 @@
-# Виртуальное окружение Python
+# --- Виртуальные окружения Python ---
 .venv/
 venv/
 env/
+
+# --- Архивы и большие файлы (ВАЖНО: защита от повторения ошибки) ---
+*.7z
+*.zip
+*.rar
+*.tar.gz
+posle_gotovie_protocol.7z
+
+# --- Рабочие папки и файлы проекта ---
 do/
 do_renamed/
 do_nachalo_new_protocol/
-posle_gotovie_protocol
+posle_gotovie_protocol/
+pustie/
 pustie
 best_power_protocol.xlsx
 output_modified.png
 output_color_image.png
-# Файлы баз данных Excel
+
+# --- Базы данных и Excel ---
 data_base_py/
 *.xlsm
 *.xlsx
 *.xls
 data_base_2026.xlsm
-# Лог-файлы
+
+# --- Лог-файлы ---
 *.log
 logi.log
 
-# Скомпилированные Python-файлы
+# --- Скомпилированные файлы Python ---
 __pycache__/
 *.pyc
 *.pyo
 
-# Переменные окружения
+# --- Переменные окружения ---
 .env
 .env.local
 
-# IDE
+# --- IDE и редакторы ---
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# OS
+# --- Операционные системы ---
 .DS_Store
 Thumbs.db

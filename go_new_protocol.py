@@ -66,8 +66,9 @@ def go_po_papkam(target_folder, data):
                             replace_text_power = round(result_nuznii["rich"] * (1 + (random.randint(2, 8) / 100)),
                                                        1)
                             replace_text_atenuazia = random.randint(45, 55)
+                            atenuazia_vezde = random.choice([10, 15])
                             replace_text_neravnomernost_achh = round(random.randint(2, 9) / 10, 1)
-                            replace_text_MER = round(random.randint(365, 405) / 10, 1)
+                            replace_text_MER = round(random.randint(365, 375) / 10, 1)
                             replace_text_MER_niznie = round(
                                 float(replace_text_MER) - float(random.randint(2, 15) / 10), 1)
                             replace_text_frequency_offset = round(random.randint(-4, 4) / 10, 1)
@@ -119,7 +120,7 @@ def go_po_papkam(target_folder, data):
                                                              time_date_protocol=time_date_protocol,
                                                              replace_text_MER=replace_text_MER,
                                                              replace_text_MER_niznie=replace_text_MER_niznie,
-                                                             vnutrennia_power=vnutrennia_power)
+                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
 
                             # переделывание 2 картинки
                             input_image_2 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/2.png"
@@ -131,7 +132,7 @@ def go_po_papkam(target_folder, data):
                                                              replace_text_MER=replace_text_MER,
                                                              replace_text_MER_niznie=replace_text_MER_niznie,
                                                              replace_text_frequency_niznie=replace_text_frequency_niznie,
-                                                             vnutrennia_power=vnutrennia_power)
+                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
                             # переделывание 3 картинки
                             input_image_3 = f"/home/sem/py/pdf_name/data_base_py/3_etalon.png"
                             output_image_3 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
@@ -140,7 +141,7 @@ def go_po_papkam(target_folder, data):
                                                              time_date_protocol=time_date_protocol,
                                                              replace_text_chastota=replace_text_chastota,
                                                              replace_text_MER=replace_text_MER,
-                                                             vnutrennia_power=vnutrennia_power)
+                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
 
                             # переделывание 4 картинки
                             input_image_4 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/4.png"
@@ -151,7 +152,7 @@ def go_po_papkam(target_folder, data):
                                                              replace_text_chastota=replace_text_chastota,
                                                              replace_text_date_protocol=replace_text_date_protocol,
                                                              time_date_protocol=time_date_protocol,
-                                                             vnutrennia_power=vnutrennia_power)
+                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
                             # переделывание 5 картинки
                             input_image_5 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
                             output_image_5 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
@@ -159,7 +160,7 @@ def go_po_papkam(target_folder, data):
                                                              replace_text_chastota=replace_text_chastota,
                                                              time_date_protocol=time_date_protocol,
                                                              replace_text_date_protocol=replace_text_date_protocol,
-                                                             vnutrennia_power=vnutrennia_power)
+                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
                             # переделывание 6 картинки
                             input_image_6 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/6.png"
                             output_image_6 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/6.png"
@@ -167,7 +168,7 @@ def go_po_papkam(target_folder, data):
                                                              replace_text_chastota=replace_text_chastota,
                                                              replace_text_date_protocol=replace_text_date_protocol,
                                                              time_date_protocol=time_date_protocol,
-                                                             vnutrennia_power=vnutrennia_power)
+                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
                             # переделывание мощности
                             input_image_7 = f"/home/sem/py/pdf_name/data_base_py/power_etalon.png"
                             output_image_7 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/power.png"

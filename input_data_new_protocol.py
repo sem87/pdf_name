@@ -21,7 +21,8 @@ def input_rename_new_protocol(output_folder, inventory_protocol, mux_protocol, t
                               izgotovitel_protocol,
                               serial_number_protocol, cell_id_protocol, rich_protocol, tvk_protocol, date_protocol,
                               name_naselennogo_puncta, chastota, model_protocol, replace_text_power, replace_text_MER,
-                              replace_text_neravnomernost_achh, replace_text_frequency_offset,location_itog):
+                              replace_text_neravnomernost_achh, replace_text_frequency_offset,location_itog,dolznost,
+                                name_fio):
     # Формируем полный путь для сохранения
     # Имя нового файла
     # output_filename = f"Протокол_зоны_НЦТВ_{itog_rayon}_{itog_location_measure_metrics}_{date_protocol}.xlsx"
@@ -63,7 +64,8 @@ def input_rename_new_protocol(output_folder, inventory_protocol, mux_protocol, t
     sheet['I51'] = replace_text_neravnomernost_achh
     sheet['I53'] = round(random.randint(-900, 900) / 10, 1)
     sheet['I54'] = replace_text_frequency_offset
-    sheet['N61'] = "Авдяков Е.А." # if int(date_protocol.split('-')[-1]) % 2 == 0 else "Халатаев Т.С."
+    sheet['H61'] = dolznost
+    sheet['N61'] = name_fio
     sheet['H66'] = location_itog
     # 4. Сохраняем файл по новому пути
     workbook.save(output_path)

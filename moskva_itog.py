@@ -95,18 +95,13 @@ def go_po_papkam(target_folder):
                         naimenovanie_peredatchika = found_row[6].value  # G
                         rezim = found_row[9].value  # J
                         vechaemaia_programma = found_row[10].value  # K
-
-
+                        zech = found_row[24].value  # Y
 
                     else:
                         print(f"❌ '{bash}' не найден в моей базе.")
                     wb.close()
-
-
-
                 except Exception as e:
                     print(f"❌ Ошибка чтения файла {xl_path.name}: {e}")
-
                 # ====================ЗАПИСЫВАЕМ ДАННЫЕ В ТАБЛИЦУ===============
                 try:
                     wb = load_workbook(EXCEL_FILE)
@@ -154,6 +149,7 @@ def go_po_papkam(target_folder):
                         ws.cell(row=next_row, column=26).value = vnepolosnie_signali  # Z
                         ws.cell(row=next_row, column=27).value = otklonenie_zentralnoi_chastoti  # AA
                         ws.cell(row=next_row, column=28).value = pobochnie_izluchenia  # AB
+                        ws.cell(row=next_row, column=29).value = zech # AC
 
 
                         # ws.cell(row=next_row, column=15).value = fiz_yroven_plp  # P

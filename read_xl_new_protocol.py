@@ -18,6 +18,7 @@ TVK = 12  # L - ТВК
 CELL_ID = 13  # M - cсел айди
 RICH = 14  # N - РИЧ мощьность
 CHASTOTA = 30  # AD - ЧАСТОТА
+APG = 25  # AD - ЧАСТОТА
 # ====================КОНЕЦ НАСТРОЙКИ ====================
 
 def load_excel_data_protocol(filepath):
@@ -42,6 +43,7 @@ def load_excel_data_protocol(filepath):
             cell_id = row[CELL_ID - 1]
             rich = row[RICH - 1]
             chastota = row[CHASTOTA - 1]
+            apg = row[APG - 1]
             if inventory:
                 # Нормализуем ключ (убираем пробелы, приводим к верхнему регистру)
                 # key = str(inventory).strip().upper()
@@ -58,6 +60,7 @@ def load_excel_data_protocol(filepath):
                     'chastota': chastota or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО",
                     'tvk': tvk or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО",
                     'location': location or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО",
+                    'apg': apg or "В-XL-МОДЕЛЬ-НЕ-УКАЗАНО",
                 }
         wb.close()
         return data

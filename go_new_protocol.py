@@ -67,8 +67,8 @@ def go_po_papkam(target_folder, data):
                                                        1)
                             replace_text_atenuazia = random.randint(45, 55)
                             atenuazia_vezde = random.choice([10, 15])
-                            replace_text_neravnomernost_achh = round(random.randint(2, 9) / 10, 1)
-                            replace_text_MER = round(random.randint(365, 375) / 10, 1)
+                            replace_text_neravnomernost_achh = round(random.randint(6, 9) / 10, 1)
+                            replace_text_MER = round(random.randint(351, 375) / 10, 1)
                             replace_text_MER_niznie = round(
                                 float(replace_text_MER) - float(random.randint(2, 15) / 10), 1)
                             replace_text_frequency_offset = round(random.randint(-4, 4) / 10, 1)
@@ -89,6 +89,19 @@ def go_po_papkam(target_folder, data):
                             tvk_protocol = result_nuznii["tvk"]
                             chastota = result_nuznii["chastota"]
                             location_itog = result_nuznii["location"]
+                            apg_my = result_nuznii["apg"]
+                            # ====Логика кто подписывает   =====
+                            mapping = {
+                                "АПГ Цеха Уфа": ("ведущий инженер", "Казаков Р.Р."),
+                                "АПГ Месягутово": ("нач. цеха", "Шишкин А.В."),
+                                "АПГ Белебей": ("ведущий инженер", "Желнов Ю.Н."),
+                                "АПГ Мелеуз": ("нач. цеха", "Дегтярев А.Н."),
+                                "АПГ Белорецк": ("нач. цеха", "Ефремов Е.В."),
+                                "АПГ Сибай": ("нач. цеха", "Тукаев Г.А."),
+                                "АПГ Бураево": ("ведущий инженер", "Сагдиев М.В.")
+                            }
+                            dolznost, name_fio = mapping.get(apg_my, (None, None))
+                            # ======конец    Логика кто подписывает====
                             # print(inventory_protocol, mux_protocol, transmitter_protocol, izgotovitel_protocol,
                             #       serial_number_protocol, cell_id_protocol, rich_protocol, tvk_protocol)
                             #
@@ -108,7 +121,10 @@ def go_po_papkam(target_folder, data):
                                 chastota=chastota, model_protocol=model_protocol,
                                 replace_text_power=replace_text_power, replace_text_MER=replace_text_MER,
                                 replace_text_neravnomernost_achh=replace_text_neravnomernost_achh,
-                                replace_text_frequency_offset=replace_text_frequency_offset)
+                                replace_text_frequency_offset=replace_text_frequency_offset,
+                                dolznost=dolznost,
+                                name_fio=name_fio
+                            )
 
                             # переделывание 1 картинки
                             input_image_1 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/1.png"

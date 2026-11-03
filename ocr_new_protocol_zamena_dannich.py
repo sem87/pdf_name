@@ -1,180 +1,103 @@
-from PIL import Image, ImageDraw, ImageFont
 import cv2
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
 import os
 import random
 from datetime import datetime, timedelta
+from PIL import Image, ImageDraw, ImageFont
 
-# def replace_carrier_frequency_offset(input_image_path, output_image_path, new_value="0.7"):
-#     """
-#     Заменяет значение Carrier Frequency Offset на изображении
-#     """
-#     # Открываем изображение
-#     img = Image.open(input_image_path)
-#     draw = ImageDraw.Draw(img)
-#
-#     # Координаты области значения Carrier Frequency Offset
-#     # (настройте под ваше изображение)
-#     # Примерные координаты для вашего скриншота:
-#     x1, y1 = 520, 395  # левый верхний угол
-#     x2, y2 = 620, 420  # правый нижний угол
-#
-#     # Цвет фона (серый, как на изображении)
-#     bg_color = (210, 210, 210)  # светло-серый
-#
-#     # Закрашиваем область старым значением
-#     draw.rectangle([x1, y1, x2, y2], fill=bg_color)
-#
-#     # Пробуем загрузить шрифт (можно изменить на свой)
-#     try:
-#         # Для Linux
-#         font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 14)
-#     except:
-#         try:
-#             # Для Windows
-#             font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 14)
-#         except:
-#             # Стандартный шрифт
-#             font = ImageFont.load_default()
-#
-#     # Текст с новым значением
-#     text = f"{new_value} Hz"
-#     text_color = (0, 0, 180)  # темно-синий, как на оригинальном изображении
-#
-#     # Вычисляем позицию для центрирования текста
-#     bbox = draw.textbbox((0, 0), text, font=font)
-#     text_width = bbox[2] - bbox[0]
-#     text_height = bbox[3] - bbox[1]
-#
-#     x_text = x1 + (x2 - x1 - text_width) // 2
-#     y_text = y1 + (y2 - y1 - text_height) // 2
-#
-#     # Рисуем новый текст
-#     draw.text((x_text, y_text), text, fill=text_color, font=font)
-#
-#     # Сохраняем результат
-#     img.save(output_image_path)
-#     print(f"Изображение сохранено: {output_image_path}")
-#     return img
-#
-#
-# def replace_carrier_frequency_offset_auto(input_image_path, output_image_path, new_value="0.7"):
-#     """
-#     Автоматический поиск и замена значения Carrier Frequency Offset
-#     с использованием OpenCV и шаблонов
-#     """
-#     # Открываем изображение
-#     img = Image.open(input_image_path)
-#     img_cv = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-#     draw = ImageDraw.Draw(img)
-#
-#     # Ищем строку "Carrier Frequency Offset"
-#     # Координаты примерные - нужно настроить или использовать OCR
-#     label_y = 395  # Y-координата строки
-#
-#     # Область где находится значение (справа от метки)
-#     value_x_start = 520
-#     value_x_end = 620
-#     value_y_start = 395
-#     value_y_end = 420
-#
-#     # Закрашиваем старое значение
-#     bg_color = (210, 210, 210)
-#     draw.rectangle([value_x_start, value_y_start, value_x_end, value_y_end], fill=bg_color)
-#
-#     # Загружаем шрифт
-#     try:
-#         font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 14)
-#     except:
-#         try:
-#             font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 14)
-#         except:
-#             font = ImageFont.load_default()
-#
-#     # Новый текст
-#     text = f"{new_value} Hz"
-#     text_color = (0, 0, 180)
-#
-#     # Позиция текста
-#     bbox = draw.textbbox((0, 0), text, font=font)
-#     text_width = bbox[2] - bbox[0]
-#     text_height = bbox[3] - bbox[1]
-#
-#     x_text = value_x_start + (value_x_end - value_x_start - text_width) // 2
-#     y_text = value_y_start + (value_y_end - value_y_start - text_height) // 2
-#
-#     draw.text((x_text, y_text), text, fill=text_color, font=font)
-#
-#     # Сохраняем
-#     img.save(output_image_path)
-#     print(f"Изображение сохранено: {output_image_path}")
-#     return img
 
-def menaem_parametri_na_nuznie(draw, replace_text, x1, y1, x2, y2, text_color, bg_color, font):
-    """МЕНЯЕТ НА НУЖНЫЙ ТЕКСТ, МОЖНО НЕСКОЛЬКО БЛОКОВ НА 1 КАРТИНКУ"""
-    # Координаты значения (настройте под ваше изображение)
-    coords = {'x1': x1, 'y1': y1, 'x2': x2, 'y2': y2}
-    draw.rectangle([coords['x1'], coords['y1'], coords['x2'], coords['y2']], fill=bg_color)
-    text = f"{replace_text}"
-    # Рисуем текст, жестко привязывая его верхний левый угол к координатам (x1, y1)
-    draw.text((x1, y1), text, fill=text_color, font=font, anchor="lt")
+def menaem_parametri_na_nuznie(draw, replace_text, x1, y1, x2, y2,
+                               text_color, bg_color, font, anchor="lt", tracking=-1):
+    draw.rectangle([x1, y1, x2, y2], fill=bg_color)
+    text = str(replace_text)
+
+    if anchor[0] == "l":   tx = x1
+    elif anchor[0] == "m": tx = (x1 + x2) / 2
+    elif anchor[0] == "r": tx = x2
+    else:                  tx = x1
+
+    if anchor[1] == "t":   ty = y1
+    elif anchor[1] == "m": ty = (y1 + y2) / 2
+    elif anchor[1] in ("b", "d", "s"): ty = y2
+    else:                  ty = y1
+
+    widths = [draw.textlength(c, font=font) for c in text]
+    total = sum(widths) + tracking * (len(text) - 1)
+
+    if anchor[0] == "m":   cx = tx - total / 2
+    elif anchor[0] == "r": cx = tx - total
+    else:                  cx = tx
+
+    for c, w in zip(text, widths):
+        draw.text((cx, ty), c, fill=text_color, font=font, anchor="l" + anchor[1])
+        cx += w + tracking
+
 
 
 def find_and_replace_text_in_image_1(input_path, output_path, replace_text_date_protocol, replace_text_chastota,
                                      replace_text_frequency_offset, time_date_protocol, replace_text_MER,
-                                     replace_text_MER_niznie,vnutrennia_power,atenuazia_vezde):
+                                     replace_text_MER_niznie,vnutrennia_power,symbol_rate_ofset,crest_factor,bb_BER):
     """ОТКРЫВАЕМ И СОХРАНЯЕМ ДАННЫЕ"""
     img = Image.open(input_path)
     draw = ImageDraw.Draw(img)
-    font_seredina = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
-                                       size=16)  # боле менее похож
+    font_seredina = ImageFont.truetype("/usr/share/fonts/truetype/msttcorefonts/Arial_Bold.ttf", size=15)
+    font_seredina2 = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf", size=16)
     font_date = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
                                    size=18)  # боле менее похож
+
     # вставка даты
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_date_protocol, x1=456, y1=3, x2=534, y2=15,
-                               text_color=(250, 250, 222), bg_color=(0, 0, 24), font=font_date)
+                               text_color=(250, 250, 222), bg_color=(0, 0, 24), font=font_date, anchor="rd")
     # вставка времени
     menaem_parametri_na_nuznie(draw, replace_text=time_date_protocol, x1=548, y1=3, x2=594, y2=15,
-                               text_color=(250, 250, 222), bg_color=(0, 0, 24), font=font_date)
+                               text_color=(250, 250, 222), bg_color=(0, 0, 24), font=font_date, anchor="rd")
     # вставка частота
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=368, y1=24, x2=390, y2=34,
                                text_color=(0, 0, 0), bg_color=(189, 190, 189), font=font_seredina)
-    # # вставка атиньюация
-    # menaem_parametri_na_nuznie(draw, replace_text=atenuazia_vezde, x1=532, y1=83, x2=545, y2=94,
-    #                            text_color=(0, 0, 0), bg_color=(189, 190, 189), font=font_seredina)
-    # вставка carrier frequency offset
-    menaem_parametri_na_nuznie(draw, replace_text=f"   {replace_text_frequency_offset}", x1=426, y1=266, x2=467, y2=277,
-                               text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina)
     # вставка внутренняя мощьность
-    menaem_parametri_na_nuznie(draw, replace_text=f"   {vnutrennia_power}", x1=421, y1=166, x2=458, y2=177,
-                               text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina)
-    # вставка BER
-    menaem_parametri_na_nuznie(draw, replace_text="0.0E-09", x1=353, y1=406, x2=402, y2=416, text_color=(0, 0, 165),
-                               bg_color=(189, 190, 189), font=font_seredina)
-    # вставка BER
-    menaem_parametri_na_nuznie(draw, replace_text="0.0E-09", x1=531, y1=406, x2=577, y2=416, text_color=(0, 0, 165),
-                               bg_color=(189, 190, 189), font=font_seredina)
+    menaem_parametri_na_nuznie(draw, replace_text=f"   {vnutrennia_power}", x1=421, y1=162, x2=458, y2=177,
+                               text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina, anchor="rs")
+    # вставка crest_factor
+    menaem_parametri_na_nuznie(draw, replace_text=f"   {crest_factor}", x1=421, y1=182, x2=458, y2=197,
+                               text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina, anchor="rs")
+
+    # вставка carrier frequency offset
+    menaem_parametri_na_nuznie(draw, replace_text=f"   {replace_text_frequency_offset}", x1=426, y1=262, x2=458, y2=277,
+                               text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina,anchor="rs")
+    # вставка simbol rate offset
+    menaem_parametri_na_nuznie(draw, replace_text=f"   {symbol_rate_ofset}", x1=420, y1=282, x2=458, y2=297,
+                               text_color=(0, 0, 165), bg_color=(189, 190, 189), font=font_seredina,anchor="rs")
     # вставка MER вверху
-    menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER_niznie, x1=360, y1=306, x2=387, y2=316,
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER_niznie, x1=360, y1=302, x2=385, y2=317,
                                text_color=(0, 0, 165),
-                               bg_color=(189, 190, 189), font=font_seredina)
+                               bg_color=(189, 190, 189), font=font_seredina,anchor="rs")
     # вставка MER ниже
-    menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER, x1=360, y1=345, x2=384, y2=357,
+    menaem_parametri_na_nuznie(draw, replace_text=replace_text_MER, x1=360, y1=342, x2=385, y2=357,
                                text_color=(0, 0, 165),
-                               bg_color=(189, 190, 189), font=font_seredina)
+                               bg_color=(189, 190, 189), font=font_seredina,anchor="rs")
+
+    # вставка BER
+    menaem_parametri_na_nuznie(draw, replace_text="0.0E-09", x1=353, y1=402, x2=402, y2=417, text_color=(0, 0, 165),
+                               bg_color=(189, 190, 189), font=font_seredina,anchor="rs")
+    # вставка BER
+    menaem_parametri_na_nuznie(draw, replace_text="0.0E-09", x1=531, y1=402, x2=577, y2=417, text_color=(0, 0, 165),
+                               bg_color=(189, 190, 189), font=font_seredina,anchor="rs")
+    # вставка BER
+    menaem_parametri_na_nuznie(draw, replace_text=f"0.0E-0{bb_BER}", x1=323, y1=422, x2=371, y2=437, text_color=(0, 0, 165),
+                               bg_color=(189, 190, 189), font=font_seredina,anchor="rs")
+
     img.save(output_path)
     return img
 
 
 def find_and_replace_text_in_image_2(input_path, output_path, replace_text_date_protocol, replace_text_chastota,
                                      replace_text_MER, replace_text_MER_niznie, replace_text_frequency_niznie,
-                                     time_date_protocol,vnutrennia_power,atenuazia_vezde):
+                                     time_date_protocol,vnutrennia_power,atenuazia_vezde,symbol_rate_ofset):
     """ОТКРЫВАЕМ И СОХРАНЯЕМ ДАННЫЕ"""
     img = Image.open(input_path)
     draw = ImageDraw.Draw(img)
-    font_seredina = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
-                                       size=16)  # боле менее похож
+    font_seredina = ImageFont.truetype("/usr/share/fonts/truetype/msttcorefonts/Arial_Bold.ttf", size=15)
+    font_seredina2 = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf", size=16)
     font_date = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf",
                                    size=18)  # боле менее похож
     # вставка даты
@@ -202,7 +125,10 @@ def find_and_replace_text_in_image_2(input_path, output_path, replace_text_date_
     menaem_parametri_na_nuznie(draw, replace_text=f"  {vnutrennia_power2}", x1=564, y1=166, x2=601, y2=177,
                                text_color=(0, 0, 180), bg_color=(189, 190, 189), font=font_seredina)
     # вставка carrier frequency offset  пониженные значение
-    menaem_parametri_na_nuznie(draw, replace_text=f"   {replace_text_frequency_niznie}", x1=583, y1=246, x2=615, y2=258,
+    menaem_parametri_na_nuznie(draw, replace_text=f" {replace_text_frequency_niznie}", x1=583, y1=246, x2=615, y2=258,
+                               text_color=(0, 0, 180), bg_color=(189, 190, 189), font=font_seredina)
+    # вставка simbol rate offset
+    menaem_parametri_na_nuznie(draw, replace_text=f" {symbol_rate_ofset}", x1=580, y1=266, x2=602, y2=276,
                                text_color=(0, 0, 180), bg_color=(189, 190, 189), font=font_seredina)
     # вставка BER
     menaem_parametri_na_nuznie(draw, replace_text="0.0E-09", x1=589, y1=386, x2=635, y2=397, text_color=(0, 0, 165),

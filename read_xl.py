@@ -84,15 +84,17 @@ def poisk_data(query):
         logger.warning(f"{query} не найден в XL!.Ошибка в read_xl/poisk_data() {e}")
 # ==================== ГЛАВНАЯ ФУНКЦИЯ =======================
 if __name__ == "__main__":
-    clean_date = "07.07.2026"
-    clean_inventory = "БАШ2360"
+    clean_date = "2026.10.29"
+    clean_inventory = "БАШ2364"
     # ===========================================
     results=poisk_data(query = clean_inventory)
     location = results['location']
     mux = "mux-"+str(results['mux'])
     transmitter = results['transmitter']
-    new_filename = f"Протокол_{clean_date}_{location}_{mux}_{transmitter}_{clean_inventory}.pdf"
+    # new_filename = f"Протокол_{clean_date}_{location}_{mux}_{transmitter}_{clean_inventory}.pdf"
+    # =======Новое наименование файла========
+    new_filename = f"{transmitter}_{clean_date}.pdf"
     print(new_filename)
-    # print(location)
+    print(location)
     # print(mux)
     # print(transmitter)

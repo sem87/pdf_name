@@ -68,6 +68,7 @@ def go_po_papkam(target_folder, data):
                             replace_text_atenuazia = random.randint(45, 55)
                             atenuazia_vezde = random.choice([10, 15])
                             replace_text_neravnomernost_achh = round(random.randint(6, 9) / 10, 1)
+                            symbol_rate_ofset = round(random.randint(1, 9) / 10, 1)
                             replace_text_MER = round(random.randint(351, 375) / 10, 1)
                             replace_text_MER_niznie = round(
                                 float(replace_text_MER) - float(random.randint(2, 15) / 10), 1)
@@ -75,6 +76,8 @@ def go_po_papkam(target_folder, data):
                             replace_text_frequency_niznie = round(
                                 float(replace_text_frequency_offset) - float(random.randint(1, 4) / 10), 1)
                             vnutrennia_power = round(random.randint(-1402, -1072) / 100, 1)
+                            crest_factor = round(random.randint(1001, 1389) / 100, 2)
+                            bb_BER = random.randint(3, 6)
                             # =========До начала изменения пропишу все параметры чтобы не запутаться=========
                             # Нужно определится с этими параметрами !!!!!!!!!!!!!!!!!!!!!!!
 
@@ -92,13 +95,13 @@ def go_po_papkam(target_folder, data):
                             apg_my = result_nuznii["apg"]
                             # ====Логика кто подписывает   =====
                             mapping = {
-                                "АПГ Цеха Уфа": ("ведущий инженер", "Казаков Р.Р."),
-                                "АПГ Месягутово": ("нач. цеха", "Шишкин А.В."),
-                                "АПГ Белебей": ("ведущий инженер", "Желнов Ю.Н."),
-                                "АПГ Мелеуз": ("нач. цеха", "Дегтярев А.Н."),
-                                "АПГ Белорецк": ("нач. цеха", "Ефремов Е.В."),
-                                "АПГ Сибай": ("нач. цеха", "Тукаев Г.А."),
-                                "АПГ Бураево": ("ведущий инженер", "Сагдиев М.В.")
+                                "АПГ Цеха Уфа": ("Ведущий инженер", "Казаков Р.Р."),
+                                "АПГ Месягутово": ("Нач. цеха", "Шишкин А.В."),
+                                "АПГ Белебей": ("Ведущий инженер", "Желнов Ю.Н."),
+                                "АПГ Мелеуз": ("Нач. цеха", "Дегтярев А.Н."),
+                                "АПГ Белорецк": ("Нач. цеха", "Ефремов Е.В."),
+                                "АПГ Сибай": ("Нач. цеха", "Тукаев Г.А."),
+                                "АПГ Бураево": ("Ведущий инженер", "Сагдиев М.В.")
                             }
                             dolznost, name_fio = mapping.get(apg_my, (None, None))
                             # ======конец    Логика кто подписывает====
@@ -136,7 +139,7 @@ def go_po_papkam(target_folder, data):
                                                              time_date_protocol=time_date_protocol,
                                                              replace_text_MER=replace_text_MER,
                                                              replace_text_MER_niznie=replace_text_MER_niznie,
-                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
+                                                             vnutrennia_power=vnutrennia_power,symbol_rate_ofset=symbol_rate_ofset,crest_factor=crest_factor,bb_BER=bb_BER)
 
                             # переделывание 2 картинки
                             input_image_2 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/2.png"
@@ -148,9 +151,9 @@ def go_po_papkam(target_folder, data):
                                                              replace_text_MER=replace_text_MER,
                                                              replace_text_MER_niznie=replace_text_MER_niznie,
                                                              replace_text_frequency_niznie=replace_text_frequency_niznie,
-                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
+                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde,symbol_rate_ofset=symbol_rate_ofset)
                             # переделывание 3 картинки
-                            input_image_3 = f"/home/sem/py/pdf_name/data_base_py/3_etalon.png"
+                            input_image_3 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
                             output_image_3 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
                             find_and_replace_text_in_image_3(input_path=input_image_3, output_path=output_image_3,
                                                              replace_text_date_protocol=replace_text_date_protocol,

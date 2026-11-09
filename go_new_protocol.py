@@ -9,7 +9,7 @@ from datetime import datetime
 from input_data_new_protocol import input_rename_new_protocol, insert_png_folder_to_xlsx, convert_xlsx_to_pdf
 from ocr_new_protocol_zamena_dannich import find_and_replace_text_in_image_1, find_and_replace_text_in_image_2, \
     find_and_replace_text_in_image_3, find_and_replace_text_in_image_4, find_and_replace_text_in_image_5, \
-    find_and_replace_text_in_image_6, find_and_replace_text_in_image_7
+    find_and_replace_text_in_image_6, find_and_replace_text_in_image_7,find_and_replace_text_in_image_power
 
 # ==================ВХОДНЫЕ ДАННЫЕ=================
 # Указываем имя/путь папки
@@ -59,15 +59,18 @@ def go_po_papkam(target_folder, data):
                             # print(result_nuznii)
                             # НУЖНО СОЗДАТЬ ПАПКУ ПОТОМ В НЕЙ ПАПКУ С MUX И УЖЕ В НЕЙ СОХРАНЯТЬ ПЕРЕДЕЛАННЫЕ ФОТО ГОТОВЫЙ ПРОТОКОЛ XL И PDF
                             # Нужно определится с этими параметрами !!!!!!!!!!!!!!!!!!!!!!!
-                            replace_text_date_protocol = datetime.strptime(date_protocol, "%Y-%m-%d").strftime(
-                                "%d/%m/%Y")
+                            # replace_text_date_protocol = datetime.strptime(date_protocol, "%Y-%m-%d").strftime("%d/%m/%y")
+                            # date_protocol = "2026-10-05"  ->  "05/10/26"
+                            y, m, d = str(date_protocol).split("-")
+                            replace_text_date_protocol = f"{d}/{m}/{y[2:]}"
+
                             time_date_protocol = f"{random.randint(12, 15)}:{random.randint(10, 57)}"
                             replace_text_chastota = result_nuznii["chastota"]
-                            replace_text_power = round(result_nuznii["rich"] * (1 + (random.randint(2, 8) / 100)),
-                                                       1)
+                            replace_text_power = round(result_nuznii["rich"] * (1 + (random.randint(2, 8) / 100)),1)
                             replace_text_atenuazia = random.randint(45, 55)
                             atenuazia_vezde = random.choice([10, 15])
                             replace_text_neravnomernost_achh = round(random.randint(6, 9) / 10, 1)
+                            phase_pk_pk = round(random.randint(401, 609) / 10, 1)
                             symbol_rate_ofset = round(random.randint(1, 9) / 10, 1)
                             replace_text_MER = round(random.randint(351, 375) / 10, 1)
                             replace_text_MER_niznie = round(
@@ -78,6 +81,11 @@ def go_po_papkam(target_folder, data):
                             vnutrennia_power = round(random.randint(-1402, -1072) / 100, 1)
                             crest_factor = round(random.randint(1001, 1389) / 100, 2)
                             bb_BER = random.randint(3, 6)
+                            Freq_Resp_pp = round(random.randint(101, 152) / 100, 1)
+                            Occupied_Bw = round(random.randint(7610001, 7670001) / 1000000, 6)
+                            Lower_Sholder = round(random.randint(521, 591) / 10, 1)
+                            C_N_Mhz= round(random.randint(701, 791) / 10, 1)
+                            Upper_Shoulder = round(random.randint(521, 591) / 10, 1)
                             # =========До начала изменения пропишу все параметры чтобы не запутаться=========
                             # Нужно определится с этими параметрами !!!!!!!!!!!!!!!!!!!!!!!
 
@@ -151,7 +159,7 @@ def go_po_papkam(target_folder, data):
                                                              replace_text_MER=replace_text_MER,
                                                              replace_text_MER_niznie=replace_text_MER_niznie,
                                                              replace_text_frequency_niznie=replace_text_frequency_niznie,
-                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde,symbol_rate_ofset=symbol_rate_ofset)
+                                                             vnutrennia_power=vnutrennia_power,symbol_rate_ofset=symbol_rate_ofset,crest_factor=crest_factor,bb_BER=bb_BER)
                             # переделывание 3 картинки
                             input_image_3 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
                             output_image_3 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/3.png"
@@ -160,7 +168,7 @@ def go_po_papkam(target_folder, data):
                                                              time_date_protocol=time_date_protocol,
                                                              replace_text_chastota=replace_text_chastota,
                                                              replace_text_MER=replace_text_MER,
-                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
+                                                             vnutrennia_power=vnutrennia_power)
 
                             # переделывание 4 картинки
                             input_image_4 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/4.png"
@@ -171,7 +179,7 @@ def go_po_papkam(target_folder, data):
                                                              replace_text_chastota=replace_text_chastota,
                                                              replace_text_date_protocol=replace_text_date_protocol,
                                                              time_date_protocol=time_date_protocol,
-                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
+                                                             vnutrennia_power=vnutrennia_power,phase_pk_pk=phase_pk_pk)
                             # переделывание 5 картинки
                             input_image_5 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
                             output_image_5 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
@@ -179,7 +187,8 @@ def go_po_papkam(target_folder, data):
                                                              replace_text_chastota=replace_text_chastota,
                                                              time_date_protocol=time_date_protocol,
                                                              replace_text_date_protocol=replace_text_date_protocol,
-                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
+                                                             vnutrennia_power=vnutrennia_power,Freq_Resp_pp = Freq_Resp_pp,Occupied_Bw = Occupied_Bw,Lower_Sholder = Lower_Sholder,C_N_Mhz= C_N_Mhz,Upper_Shoulder = Upper_Shoulder)
+
                             # переделывание 6 картинки
                             input_image_6 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/6.png"
                             output_image_6 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/6.png"
@@ -187,25 +196,40 @@ def go_po_papkam(target_folder, data):
                                                              replace_text_chastota=replace_text_chastota,
                                                              replace_text_date_protocol=replace_text_date_protocol,
                                                              time_date_protocol=time_date_protocol,
-                                                             vnutrennia_power=vnutrennia_power,atenuazia_vezde=atenuazia_vezde)
+                                                             vnutrennia_power=vnutrennia_power)
+                            # переделывание 7 картинки
+                            input_image_7 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/7.png"
+                            output_image_7 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/7.png"
+                            find_and_replace_text_in_image_7(input_path=input_image_7, output_path=output_image_7, replace_text_date_protocol=replace_text_date_protocol, time_date_protocol=time_date_protocol)
                             # переделывание мощности
-                            input_image_7 = f"/home/sem/py/pdf_name/data_base_py/power_etalon.png"
-                            output_image_7 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/power.png"
-                            find_and_replace_text_in_image_7(input_path=input_image_7, output_path=output_image_7,
+                            input_image_power = f"/home/sem/py/pdf_name/data_base_py/power_etalon.png"
+                            output_image_power = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/power.png"
+                            find_and_replace_text_in_image_power(input_path=input_image_power, output_path=output_image_power,
                                                              replace_text_chastota=replace_text_chastota,
                                                              replace_text_power=replace_text_power,
                                                              replace_text_atenuazia=replace_text_atenuazia)
 
                             # Вставляем картинки в xl и сохраняем
                             # Индивидуальная конфигурация каждой картинки
+                            # images_config = {
+                            #     "1.png": {"x_cm": 2.0, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
+                            #     "2.png": {"x_cm": 10.5, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
+                            #     "3.png": {"x_cm": 2.0, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
+                            #     "4.png": {"x_cm": 10.5, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
+                            #     "5.png": {"x_cm": 2.0, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
+                            #     "6.png": {"x_cm": 10.5, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
+                            #     "7.png": {"x_cm": 2, "y_cm": 70.3, "w_cm": 8.0, "h_cm": 6.0},
+                            #     "power.png": {"x_cm": 10.5, "y_cm": 70.3, "w_cm": 8, "h_cm": 6},
+                            # }
                             images_config = {
-                                "1.png": {"x_cm": 2.0, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
-                                "2.png": {"x_cm": 10.5, "y_cm": 52.0, "w_cm": 8.0, "h_cm": 6.0},
-                                "3.png": {"x_cm": 2.0, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
-                                "4.png": {"x_cm": 10.5, "y_cm": 58.1, "w_cm": 8.0, "h_cm": 6.0},
-                                "5.png": {"x_cm": 2.0, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
-                                "6.png": {"x_cm": 10.5, "y_cm": 64.2, "w_cm": 8.0, "h_cm": 6.0},
-                                "power.png": {"x_cm": 2.0, "y_cm": 70.6, "w_cm": 10.0, "h_cm": 5.3},
+                                "1.png": {"x_cm": 2.0, "y_cm": 51.5, "w_cm": 8.0, "h_cm": 6.0},
+                                "2.png": {"x_cm": 10.5, "y_cm": 51.5, "w_cm": 8.0, "h_cm": 6.0},
+                                "3.png": {"x_cm": 2.0, "y_cm": 57.6, "w_cm": 8.0, "h_cm": 6.0},
+                                "4.png": {"x_cm": 10.5, "y_cm": 57.6, "w_cm": 8.0, "h_cm": 6.0},
+                                "5.png": {"x_cm": 2.0, "y_cm": 63.7, "w_cm": 8.0, "h_cm": 6.0},
+                                "6.png": {"x_cm": 10.5, "y_cm": 63.7, "w_cm": 8.0, "h_cm": 6.0},
+                                "7.png": {"x_cm": 2, "y_cm": 70.0, "w_cm": 8.0, "h_cm": 6.0},
+                                "power.png": {"x_cm": 10.5, "y_cm": 70.0, "w_cm": 8, "h_cm": 6},
                             }
                             insert_png_folder_to_xlsx(
                                 xlsx_path=f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/Протокол_{date_protocol}_{name_naselennogo_puncta}_{mux_protocol}_{transmitter_protocol}_{inventory_protocol}.xlsx",

@@ -282,76 +282,80 @@ def find_and_replace_text_in_image_6(input_path, output_path, replace_text_chast
     menaem_parametri_na_nuznie(draw, replace_text=replace_text_chastota, x1=64, y1=423, x2=93, y2=438,
                                text_color=(250, 250, 250), bg_color=(0, 0, 0), font=font_seredina, anchor="rs")
     # вставка СПАН
-    menaem_parametri_na_nuznie(draw, replace_text="20", x1=472, y1=423, x2=488, y2=438,
+    menaem_parametri_na_nuznie(draw, replace_text="30", x1=472, y1=423, x2=488, y2=438,
                                text_color=(250, 250, 250), bg_color=(0, 0, 0), font=font_seredina, anchor="rs")
     # =======вставка рандомных расчетов==========
     # =====Freq====
-    freq1 = round(random.randint(7000000, 9000000) / 1000000, 6)
+    freq1 = round(random.randint(12000000, 13000000) / 1000000, 6)
     freq1_str = f"{freq1:.6f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"  -{freq1_str}", x1=232, y1=122, x2=297, y2=135,
                                text_color=(255, 255, 255), bg_color=(0, 81, 206), font=font_seredina2, anchor="rs")
-    freq2 = round(random.randint(4000000, 5000000) / 1000000, 6)
+    freq2 = round(random.randint(6000000, 7000000) / 1000000, 6)
     freq2_str = f"{freq2:.6f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"  -{freq2_str}", x1=232, y1=140, x2=297, y2=155,
                                text_color=(255, 255, 255), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
-    freq3 = round(random.randint(4000000, 5000000) / 1000000, 6)
+    freq3 = round(random.randint(4200000, 5000000) / 1000000, 6)
     freq3_str = f"{freq3:.6f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"   {freq3_str}", x1=232, y1=160, x2=297, y2=175,
                                text_color=(255, 255, 255), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
-    freq4 = round(random.randint(7000000, 9000000) / 1000000, 6)
+    freq4 = round(random.randint(3900000, 4000000) / 1000000, 6)
     freq4_str = f"{freq4:.6f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"   {freq4_str}", x1=232, y1=180, x2=297, y2=195,
                                text_color=(255, 255, 255), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
     # =====Emission====
-    emis1 = round(random.randint(11000, 13000) / 100, 2)
+    emis1 = round(random.randint(11000, 12000) / 100, 2)
     emis1_str = f"{emis1:.2f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"-{emis1_str}", x1=342, y1=122, x2=387, y2=135,
                                text_color=(255, 255, 255), bg_color=(0, 81, 206), font=font_seredina2, anchor="rs")
-    emis2 = round(random.randint(10000, 11000) / 100, 2)
+    emis2 = round(random.randint(8500, 9000) / 100, 2)
     emis2_str = f"{emis2:.2f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"-{emis2_str}", x1=342, y1=140, x2=387, y2=155,
                                text_color=(255, 255, 255), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
-    emis3 = round(random.randint(10000, 11000) / 100, 2)
+    emis3 = round(random.randint(7300, 8000) / 100, 2)
     emis3_str = f"{emis3:.2f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"-{emis3_str}", x1=342, y1=160, x2=387, y2=175,
                                text_color=(255, 255, 255), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
-    emis4 = round(random.randint(11000, 13000) / 100, 2)
+    emis4 = round(random.randint(3280, 3600) / 100, 2)
     emis4_str = f"{emis4:.2f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"-{emis4_str}", x1=342, y1=180, x2=387, y2=195,
                                text_color=(255, 255, 255), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
     # =====Attenuation====
-    att1 = round(random.randint(7000, 8000) / 100, 2)
+    att1 = round(random.randint(12000, 13000) / 100, 2)
     att1_str = f"{att1:.2f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"-{att1_str}", x1=450, y1=122, x2=499, y2=135,
                                text_color=(255, 255, 255), bg_color=(0, 81, 206), font=font_seredina2, anchor="rs")
-    att2 = round(random.randint(5000, 6000) / 100, 2)
+    att2 = round(random.randint(9000, 9500) / 100, 2)
     att2_str = f"{att2:.2f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"-{att2_str}", x1=450, y1=140, x2=499, y2=155,
                                text_color=(255, 255, 255), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
-    att3 = round(random.randint(5000, 6000) / 100, 2)
+    att3 = round(random.randint(8000, 8700) / 100, 2)
     att3_str = f"{att3:.2f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"-{att3_str}", x1=450, y1=160, x2=499, y2=175,
                                text_color=(255, 255, 255), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
-    att4 = round(random.randint(7000, 8000) / 100, 2)
+    att4 = round(random.randint(3600, 3800) / 100, 2)
     att4_str = f"{att4:.2f}"
     menaem_parametri_na_nuznie(draw, replace_text=f"-{att4_str}", x1=450, y1=180, x2=499, y2=195,
                                text_color=(255, 255, 255), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
     # =====Margin====
-    mar1 = round(random.randint(1000, 1999) / 100, 2)
+    # mar1 = round(random.randint(1000, 1999) / 100, 2)
+    mar1 = round(att1-emis1+random.randint(10, 30) / 100, 2)
     mar1_str = f"{mar1:.2f}"
-    menaem_parametri_na_nuznie(draw, replace_text=f"{mar1_str}", x1=568, y1=124, x2=599, y2=135,
+    menaem_parametri_na_nuznie(draw, replace_text=f" {mar1_str}", x1=568, y1=124, x2=599, y2=135,
                                text_color=(0, 223, 0), bg_color=(0, 81, 206), font=font_seredina2, anchor="rs")
-    mar2 = round(random.randint(1000, 1999) / 100, 2)
+    # mar2 = round(random.randint(1000, 1999) / 100, 2)
+    mar2 = round(att2-emis2+random.randint(10, 30) / 100, 2)
     mar2_str = f"{mar2:.2f}"
-    menaem_parametri_na_nuznie(draw, replace_text=f"{mar2_str}", x1=568, y1=140, x2=599, y2=155,
+    menaem_parametri_na_nuznie(draw, replace_text=f" {mar2_str}", x1=568, y1=140, x2=599, y2=155,
                                text_color=(0, 223, 0), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
-    mar3 = round(random.randint(1000, 1999) / 100, 2)
+    # mar3 = round(random.randint(1000, 1999) / 100, 2)
+    mar3 = round(att3 - emis3+random.randint(10, 30) / 100, 2)
     mar3_str = f"{mar3:.2f}"
-    menaem_parametri_na_nuznie(draw, replace_text=f"{mar3_str}", x1=568, y1=160, x2=599, y2=175,
+    menaem_parametri_na_nuznie(draw, replace_text=f" {mar3_str}", x1=568, y1=160, x2=599, y2=175,
                                text_color=(0, 223, 0), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
-    mar4 = round(random.randint(1000, 1999) / 100, 2)
+    # mar4 = round(random.randint(1000, 1999) / 100, 2)
+    mar4 = round(att4 - emis4+random.randint(10, 30) / 100, 2)
     mar4_str = f"{mar4:.2f}"
-    menaem_parametri_na_nuznie(draw, replace_text=f"{mar4_str}", x1=568, y1=180, x2=599, y2=195,
+    menaem_parametri_na_nuznie(draw, replace_text=f" {mar4_str}", x1=568, y1=180, x2=599, y2=195,
                                text_color=(0, 223, 0), bg_color=(0, 48, 123), font=font_seredina2, anchor="rs")
 
     img.save(output_path)

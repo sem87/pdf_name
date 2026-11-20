@@ -99,7 +99,9 @@ def go_po_papkam(target_folder, data):
                             rich_protocol = result_nuznii["rich"]
                             tvk_protocol = result_nuznii["tvk"]
                             chastota = result_nuznii["chastota"]
-                            location_itog = result_nuznii["location"]
+                            # убираем что внутри звездочек
+                            location_itog = re.sub(r'\*[^*]*\*', '', result_nuznii["location"])
+
                             apg_my = result_nuznii["apg"]
                             # ====Логика кто подписывает   =====
                             mapping = {
@@ -181,13 +183,13 @@ def go_po_papkam(target_folder, data):
                                                              time_date_protocol=time_date_protocol,
                                                              vnutrennia_power=vnutrennia_power,phase_pk_pk=phase_pk_pk)
                             # переделывание 5 картинки
-                            input_image_5 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
-                            output_image_5 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
-                            find_and_replace_text_in_image_5(input_path=input_image_5, output_path=output_image_5,
-                                                             replace_text_chastota=replace_text_chastota,
-                                                             time_date_protocol=time_date_protocol,
-                                                             replace_text_date_protocol=replace_text_date_protocol,
-                                                             vnutrennia_power=vnutrennia_power,Freq_Resp_pp = Freq_Resp_pp,Occupied_Bw = Occupied_Bw,Lower_Sholder = Lower_Sholder,C_N_Mhz= C_N_Mhz,Upper_Shoulder = Upper_Shoulder)
+                            # input_image_5 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
+                            # output_image_5 = f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/5.png"
+                            # find_and_replace_text_in_image_5(input_path=input_image_5, output_path=output_image_5,
+                            #                                  replace_text_chastota=replace_text_chastota,
+                            #                                  time_date_protocol=time_date_protocol,
+                            #                                  replace_text_date_protocol=replace_text_date_protocol,
+                            #                                  vnutrennia_power=vnutrennia_power,Freq_Resp_pp = Freq_Resp_pp,Occupied_Bw = Occupied_Bw,Lower_Sholder = Lower_Sholder,C_N_Mhz= C_N_Mhz,Upper_Shoulder = Upper_Shoulder)
 
                             # переделывание 6 картинки
                             input_image_6 = f"do_nachalo_new_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/6.png"
@@ -226,11 +228,22 @@ def go_po_papkam(target_folder, data):
                                 "2.png": {"x_cm": 10.5, "y_cm": 51.5, "w_cm": 8.0, "h_cm": 6.0},
                                 "3.png": {"x_cm": 2.0, "y_cm": 57.6, "w_cm": 8.0, "h_cm": 6.0},
                                 "4.png": {"x_cm": 10.5, "y_cm": 57.6, "w_cm": 8.0, "h_cm": 6.0},
-                                "5.png": {"x_cm": 2.0, "y_cm": 63.7, "w_cm": 8.0, "h_cm": 6.0},
+                                "power.png": {"x_cm": 2.0, "y_cm": 63.7, "w_cm": 8.0, "h_cm": 6.0},
                                 "6.png": {"x_cm": 10.5, "y_cm": 63.7, "w_cm": 8.0, "h_cm": 6.0},
                                 "7.png": {"x_cm": 2, "y_cm": 70.0, "w_cm": 8.0, "h_cm": 6.0},
-                                "power.png": {"x_cm": 10.5, "y_cm": 70.0, "w_cm": 8, "h_cm": 6},
+
                             }
+                            # "5.png": {"x_cm": 10.5, "y_cm": 70.0, "w_cm": 8, "h_cm": 6},   пока убрали
+
+                            target_keys = ["1.png","2.png","3.png", "4.png", "6.png", "7.png","power.png"]
+                            #  Извлекаем словари с координатами для нужных ключей
+                            coords = [images_config[k] for k in target_keys]
+                            # Перемешиваем их
+                            random.shuffle(coords)
+                            # Возвращаем перемешанные координаты обратно к ключам
+                            for key, coord in zip(target_keys, coords):
+                                images_config[key] = coord
+
                             insert_png_folder_to_xlsx(
                                 xlsx_path=f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}/Протокол_{date_protocol}_{name_naselennogo_puncta}_{mux_protocol}_{transmitter_protocol}_{inventory_protocol}.xlsx",
                                 image_folder=f"posle_gotovie_protocol/{date_protocol} {name_naselennogo_puncta}/{item2.name}",

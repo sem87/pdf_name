@@ -297,43 +297,6 @@ spisok_bolche_100 = [
 
 
 
-
-
-
-
-
-# # ********************************************
-# SRC_DIR = "/home/sem/py/pdf_name/data_base_py/fhoto_data_base"
-# BASE_DIR = "/home/sem/py/pdf_name/pustie"
-#
-# # Все png файлы в источнике
-# all_files = [f for f in os.listdir(SRC_DIR) if f.endswith(".png")]
-#
-# for name, date in data.items():
-#     # Создаём папку с названием
-#     project_dir = os.path.join(BASE_DIR, f"{date} {name}")
-#     os.makedirs(project_dir, exist_ok=True)
-#
-#     for mux in ["1mux", "2mux"]:
-#         mux_dir = os.path.join(project_dir, mux)
-#         os.makedirs(mux_dir, exist_ok=True)
-#         num = random.randint(1, 5)
-#         for i in range(1, 8):
-#             src_file = f"{num}{i}.png"
-#             src_path = os.path.join(SRC_DIR, src_file)
-#             dst = os.path.join(mux_dir, f"{i}.png")
-#
-#             if os.path.exists(src_path):
-#                 shutil.copy2(src_path, dst)
-#                 print(f"{mux_dir}: {src_file} -> {i}.png")
-#             else:
-#                 print(f"Файл {src_file} не найден в {SRC_DIR}")
-#
-# print("Готово.")
-# # ********************************************
-
-
-
 SRC_DIR = "/home/sem/py/pdf_name/data_base_py/fhoto_data_base"
 BASE_DIR = "/home/sem/py/pdf_name/pustie"
 
@@ -349,7 +312,7 @@ for name, date in data.items():
         os.makedirs(mux_dir, exist_ok=True)
         # Проверка: если name в списке, то 6 или 7, иначе 1-5
         if name in spisok_bolche_100:
-            num = random.randint(6, 7)
+            num = random.randint(6, 8)
         else:
             num = random.randint(1, 5)
 
